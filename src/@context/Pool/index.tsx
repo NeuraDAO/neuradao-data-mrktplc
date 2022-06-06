@@ -67,10 +67,10 @@ function PoolProvider({ children }: { children: ReactNode }): ReactElement {
       poolInfoShares
     )
 
-    // Pool share in %.
+    // Pool share in %. We double it to compensate for ss bot
     const poolSharePercentage = new Decimal(poolInfoShares)
       .dividedBy(new Decimal(response.poolData.totalShares))
-      .mul(100)
+      .mul(200)
       .toFixed(2)
 
     setUserHasAddedLiquidity(Number(poolSharePercentage) > 0)
@@ -138,14 +138,15 @@ function PoolProvider({ children }: { children: ReactNode }): ReactElement {
     if (
       !poolData ||
       !poolInfo?.totalPoolTokens ||
+      !poolData.shares[0]?.shares ||
       poolData.shares[0]?.shares === '0'
     )
       return
 
-    // Pool share tokens.
+    // Pool share tokens. We double it to compensate for ss bot
     const poolSharePercentage = new Decimal(poolData.shares[0]?.shares)
       .dividedBy(poolInfo.totalPoolTokens)
-      .mul(100)
+      .mul(200)
       .toFixed(2)
 
     const ownerLiquidity = calcSingleOutGivenPoolIn(
