@@ -52,6 +52,11 @@ export async function order(
       accountId,
       asset.services[0].serviceEndpoint
     ))
+  try {
+    console.log(asset.accessDetails.baseToken.address)
+  } catch (error) {
+    console.log(error)
+  }
 
   const orderParams = {
     consumer: computeConsumerAddress || accountId,

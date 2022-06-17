@@ -26,6 +26,7 @@ import { SortTermOptions } from 'src/@types/aquarius/SearchQuery'
 import { AssetSelectionAsset } from '@shared/FormFields/AssetSelection'
 import { transformAssetToAssetSelection } from './assetConvertor'
 import { AssetExtended } from 'src/@types/AssetExtended'
+import { SlowBuffer } from 'buffer'
 
 const getComputeOrders = gql`
   query ComputeOrders($user: String!) {
@@ -82,6 +83,7 @@ async function getAssetMetadata(
   } as BaseQueryParams
   const query = generateBaseQuery(baseQueryparams)
   const result = await queryMetadata(query, cancelToken)
+  console.log('success getAssetMetadata')
   return result?.results
 }
 
@@ -115,6 +117,7 @@ export async function isOrderable(
       }
     }
   }
+  console.log('success isOrderable')
   return true
 }
 
@@ -131,6 +134,7 @@ export function getValidUntilTime(
   const minValue = Math.min(...inputValues)
   const mytime = new Date()
   mytime.setMinutes(mytime.getMinutes() + Math.floor(minValue / 60))
+  console.log('success getValidUntilTime')
   return Math.floor(mytime.getTime() / 1000)
 }
 
@@ -147,6 +151,7 @@ export async function getComputeEnviroment(
   } catch (e) {
     LoggerInstance.error('[compute] Fetch compute enviroment: ', e.message)
   }
+  console.log('success getComputeEnviroment')
 }
 
 export function getQuerryString(
@@ -165,7 +170,7 @@ export function getQuerryString(
   } as BaseQueryParams
 
   const query = generateBaseQuery(baseParams)
-
+  console.log('success getQuerryString')
   return query
 }
 
@@ -187,6 +192,7 @@ export async function getAlgorithmsForAsset(
     )
     algorithms = gueryResults?.results
   }
+  console.log('success getAlgorithmsForAsset')
   return algorithms
 }
 
@@ -205,6 +211,7 @@ export async function getAlgorithmAssetSelectionList(
       []
     )
   }
+  console.log('success getAlgorithmAssetSelectionList')
   return algorithmSelectionList
 }
 
@@ -251,6 +258,7 @@ async function getJobs(
     LoggerInstance.error(err.message)
   }
   // }
+  console.log('success getJobs')
   return computeJobs
 }
 export async function getComputeJobs(
@@ -313,7 +321,7 @@ export async function getComputeJobs(
 
   computeResult.computeJobs = await getJobs(providerUrls, accountId, assets)
   computeResult.isLoaded = true
-
+  console.log('success getComputeJobs')
   return computeResult
 }
 
@@ -346,6 +354,7 @@ export async function createTrustedAlgorithmList(
     }
     trustedAlgorithms.push(trustedAlgorithm)
   }
+  console.log('success createTrustedAlgorithmList')
   return trustedAlgorithms
 }
 
@@ -396,5 +405,6 @@ export async function checkComputeResourcesValidity(
   )
   jobStartDate.setMinutes(jobStartDate.getMinutes() + Math.floor(minValue / 60))
   const currentTime = new Date().getTime() / 1000
+  console.log('success checkComputeResourcesValidity')
   return Math.floor(jobStartDate.getTime() / 1000) > currentTime
 }

@@ -339,6 +339,7 @@ export default function Compute({
             : 3
         ]
       )
+      console.log('success setcomputeStatusText')
       const datasetOrderTx = await handleComputeOrder(
         web3,
         asset,
@@ -348,6 +349,7 @@ export default function Compute({
         initializedProviderResponse.datasets[0],
         computeEnv.consumerAddress
       )
+      console.log('success handleComputeOrder')
       if (!datasetOrderTx) {
         setError('Failed to order dataset.')
         LoggerInstance.error('[compute] Failed to order dataset.')
