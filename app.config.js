@@ -19,10 +19,10 @@ module.exports = {
 
   // List of chainIds which metadata cache queries will return by default.
   // This preselects the Chains user preferences.
-  chainIds: [3, 4, 80001, 1287],
+  chainIds: [1, 137, 56, 246, 1285],
 
   // List of all supported chainIds. Used to populate the Chains user preferences list.
-  chainIdsSupported: [3, 4, 80001, 1287],
+  chainIdsSupported: [1, 137, 56, 246, 1285, 3, 4, 80001, 1287],
 
   infuraProjectId: process.env.NEXT_PUBLIC_INFURA_PROJECT_ID || 'xxx',
 
@@ -74,9 +74,6 @@ module.exports = {
     classNameLight: 'light',
     storageKey: 'oceanDarkMode'
   },
-
-  // Wallets
-  portisId: process.env.NEXT_PUBLIC_PORTIS_ID || 'xxx',
 
   // Used to show or hide the fixed, dynamic or free price options
   // tab to publishers during the price creation.
