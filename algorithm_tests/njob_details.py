@@ -21,29 +21,41 @@ def get_job_details():
             with open(filename) as json_file:
                 ddo = json.load(json_file)
                 # search for metadata service
-                for service in ddo['service']:
-                    if service['type'] == 'metadata':
+                for service in ddo['services']:
+                    if service['type'] == 'compute':
                         job['files'][did] = list()
-                        index = 0
-                        for file in service['attributes']['main']['files']:
-                            job['files'][did].append(
-                                '/data/inputs/' + did + '/' + str(index))
-                            index = index + 1
+                        if service['files'] is str:
+                            job['files'][did].append('/data/inputs/' + did + '/0')
+                        else:
+                            index = 0
+                            for file in service['files']:
+                                job['files'][did].append(
+                                    '/data/inputs/' + did + '/' + str(index))
+                                index = index + 1
     if algo_did is not None:
         job['algo']['did'] = algo_did
         job['algo']['ddo_path'] = '/data/ddos/' + algo_did
     return job
 
 
-def line_counter(job_details):
+def log_job_details(job_details):
     """Executes the line counter based on inputs"""
     print('Starting compute job with the following input information:')
     job_details = json.dumps(job_details, sort_keys=True, indent=4)
    
-    f = open("/data/outputs/result", "w")
+    f = open("/data/outputs/result.txt", "w")
     f.write(str(job_details))
     f.close()
 
+def list_files(startpath):
+    for root, dirs, files in os.walk(startpath):
+        level = root.replace(startpath, '').count(os.sep)
+        indent = ' ' * 4 * (level)
+        print('{}{}/'.format(indent, os.path.basename(root)))
+        subindent = ' ' * 4 * (level + 1)
+        for f in files:
+            print('{}{}'.format(subindent, f))
 
 if __name__ == '__main__':
-    line_counter(get_job_details())
+    list_files(os.getcwd())
+    log_job_details(get_job_details())
