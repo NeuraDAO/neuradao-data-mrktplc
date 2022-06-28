@@ -24,7 +24,8 @@ def get_job_details():
                 for service in ddo['services']:
                     if service['type'] == 'compute':
                         job['files'][did] = list()
-                        if service['files'] is str:
+                        print(type(service['files']))
+                        if type(service['files']) == str:
                             job['files'][did].append('/data/inputs/' + did + '/0')
                         else:
                             index = 0
@@ -57,5 +58,5 @@ def list_files(startpath):
             print('{}{}'.format(subindent, f))
 
 if __name__ == '__main__':
-    list_files(os.getcwd())
+    # list_files(os.getcwd())
     log_job_details(get_job_details())
