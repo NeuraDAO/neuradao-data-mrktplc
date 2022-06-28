@@ -1,3 +1,4 @@
+import mne 
 import pandas as pd
 import numpy as np
 import os
@@ -21,18 +22,23 @@ def get_job_details():
             with open(filename) as json_file:
                 ddo = json.load(json_file)
                 # search for metadata service
-                for service in ddo['service']:
-                    if service['type'] == 'metadata':
+                for service in ddo['services']:
+                    if service['type'] == 'compute':
                         job['files'][did] = list()
-                        index = 0
-                        for file in service['attributes']['main']['files']:
-                            job['files'][did].append(
-                                '/data/inputs/' + did + '/' + str(index))
-                            index = index + 1
+                        print(type(service['files']))
+                        if type(service['files']) == str:
+                            job['files'][did].append('/data/inputs/' + did + '/0')
+                        else:
+                            index = 0
+                            for file in service['files']:
+                                job['files'][did].append(
+                                    '/data/inputs/' + did + '/' + str(index))
+                                index = index + 1
     if algo_did is not None:
         job['algo']['did'] = algo_did
         job['algo']['ddo_path'] = '/data/ddos/' + algo_did
     return job
+
 
 
 def log_shape(job_details):
