@@ -1,5 +1,6 @@
-import { ConfigHelper, LoggerInstance, Config } from '@oceanprotocol/lib'
+import { LoggerInstance, Config } from '@oceanprotocol/lib'
 // import contractAddresses from '@oceanprotocol/contracts/artifacts/address.json'
+import { ConfigHelper } from '../../custom/ConfigHelper'
 import { AbiItem } from 'web3-utils/types'
 import Web3 from 'web3'
 
