@@ -100,6 +100,9 @@ export async function queryMetadata(
       { ...query },
       { cancelToken }
     )
+    {
+      console.log({ metadataCacheUri })
+    }
     if (!response || response.status !== 200 || !response.data) return
     return transformQueryResult(response.data, query.from, query.size)
   } catch (error) {

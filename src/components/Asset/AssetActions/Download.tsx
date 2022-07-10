@@ -70,6 +70,7 @@ export default function Download({
       !orderPriceAndFees && setIsLoading(true)
       setStatusText('Refreshing price')
       // this is needed just for pool
+      console.log({ AD: asset?.accessDetails })
       const paramsForPool: CalcInGivenOutParams = {
         tokenInLiquidity: poolData?.baseTokenLiquidity,
         tokenOutLiquidity: poolData?.datatokenLiquidity,

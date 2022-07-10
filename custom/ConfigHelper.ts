@@ -5,7 +5,8 @@ import { Config, LoggerInstance } from '@oceanprotocol/lib'
 const configHelperNetworksBase: Config = {
   chainId: null,
   network: 'unknown',
-  metadataCacheUri: 'https://v4.aquarius.oceanprotocol.com',
+  // metadataCacheUri: 'https://v4.aquarius.oceanprotocol.com',
+  metadataCacheUri: 'http://138.197.136.215:5000',
   nodeUri: 'http://127.0.0.1:8545',
   providerUri: 'http://127.0.0.1:8030',
   subgraphUri: null,
@@ -48,8 +49,8 @@ export const configHelperNetworks: Config[] = [
     ...configHelperNetworksBase,
     chainId: 4,
     network: 'rinkeby',
-    nodeUri: 'https://rinkeby.infura.io/v3',
-    providerUri: 'https://v4.provider.rinkeby.oceanprotocol.com',
+    nodeUri: 'https://rinkeby.infura.io/v3/c93bc666c87a4c71b18eb76d79201a3c',
+    providerUri: 'http://138.197.136.215:8030',
     subgraphUri: 'http://138.197.136.215:9000',
     explorerUri: 'https://rinkeby.etherscan.io',
     gasFeeMultiplier: 1.1
