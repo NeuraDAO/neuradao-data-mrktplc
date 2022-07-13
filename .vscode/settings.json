@@ -12,6 +12,7 @@
   ],
   "search.exclude": {
     "**/.next": true,
+    "**/node_modules": false,
     "**/out": true
   }
 }
