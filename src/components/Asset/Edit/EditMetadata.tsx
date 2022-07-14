@@ -25,6 +25,7 @@ import { useAsset } from '@context/Asset'
 import { setNftMetadata } from '@utils/nft'
 import { sanitizeUrl } from '@utils/url'
 import { getEncryptedFiles } from '@utils/provider'
+import { getAlgorithmContainerPreset } from './_utils'
 
 export default function Edit({
   asset
@@ -87,7 +88,20 @@ export default function Edit({
           description: values.description,
           links: linksTransformed,
           author: values.author,
-          algorithm: values.algorithm // this is supposed to be dockerImage according to index.tsx in Publish/Metadata
+          algorithm: values.dockerImage
+            ? {
+                language: '',
+                version: '0.1',
+                container: {
+                  entrypoint: getAlgorithmContainerPreset(values.dockerImage)
+                    .entrypoint,
+                  image: getAlgorithmContainerPreset(values.dockerImage).image,
+                  tag: getAlgorithmContainerPreset(values.dockerImage).tag,
+                  checksum: getAlgorithmContainerPreset(values.dockerImage)
+                    .checksum
+                }
+              }
+            : asset?.metadata.algorithm
         }
       } else {
         updatedMetadata = {

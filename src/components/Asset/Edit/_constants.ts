@@ -31,8 +31,8 @@ export function getInitialValues(
         links: metadata?.links,
         files: '',
         timeout: secondsToString(timeout),
-        author: metadata?.author,
-        algorithm: metadata?.algorithm // TODO: remove this
+        author: metadata?.author
+        // algorithm: metadata?.algorithm // TODO: remove this
       }
     : {
         name: metadata?.name,
@@ -50,6 +50,13 @@ export const computeSettingsValidationSchema = Yup.object().shape({
   publisherTrustedAlgorithms: Yup.array().nullable(),
   publisherTrustedAlgorithmPublishers: Yup.array().nullable()
 })
+
+export interface MetadataAlgorithmContainer {
+  entrypoint: string
+  image: string
+  tag: string
+  checksum: string
+}
 
 export const algorithmContainerPresets: MetadataAlgorithmContainer[] = [
   {

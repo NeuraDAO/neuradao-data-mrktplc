@@ -4,6 +4,7 @@ import DebugOutput from '@shared/DebugOutput'
 import { MetadataEditForm } from './_types'
 import { mapTimeoutStringToSeconds } from '@utils/ddo'
 import { sanitizeUrl } from '@utils/url'
+import { getAlgorithmContainerPreset } from './_utils'
 
 export default function DebugEditMetadata({
   values,
@@ -20,7 +21,20 @@ export default function DebugEditMetadata({
     name: values.name,
     description: values.description,
     links: linksTransformed,
-    author: values.author
+    author: values.author,
+    algorithm: values.dockerImage
+      ? {
+          language: '',
+          version: '0.1',
+          container: {
+            entrypoint: getAlgorithmContainerPreset(values.dockerImage)
+              .entrypoint,
+            image: getAlgorithmContainerPreset(values.dockerImage).image,
+            tag: getAlgorithmContainerPreset(values.dockerImage).tag,
+            checksum: getAlgorithmContainerPreset(values.dockerImage).checksum
+          }
+        }
+      : asset?.metadata.algorithm
   }
   const updatedService: Service = {
     ...asset?.services[0],
