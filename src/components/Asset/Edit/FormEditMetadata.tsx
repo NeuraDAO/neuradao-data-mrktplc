@@ -3,7 +3,6 @@ import { Field, Form, useFormikContext } from 'formik'
 import Input, { InputProps } from '@shared/FormInput'
 import FormActions from './FormActions'
 import { useAsset } from '@context/Asset'
-import { getFieldContent } from '@utils/form'
 import { algorithmContainerPresets } from './_constants'
 
 export function checkIfTimeoutInPredefinedValues(
@@ -19,11 +18,13 @@ export function checkIfTimeoutInPredefinedValues(
 export default function FormEditMetadata({
   data,
   showPrice,
-  isComputeDataset
+  isComputeDataset,
+  isAlgorithm
 }: {
   data: InputProps[]
   showPrice: boolean
   isComputeDataset: boolean
+  isAlgorithm: boolean
 }): ReactElement {
   const { oceanConfig } = useAsset()
   console.log('[data]', data)
@@ -56,10 +57,10 @@ export default function FormEditMetadata({
   const fields = data.map((field: InputProps) => {
     if (
       (!showPrice && field.name === 'price') ||
-      (field.name.indexOf('docker') !== -1 && !isComputeDataset)
+      (field.name.indexOf('docker') !== -1 && !isAlgorithm)
     ) {
       return null
-    } else if (field.name.indexOf('docker') !== -1 && isComputeDataset) {
+    } else if (field.name.indexOf('docker') !== -1 && isAlgorithm) {
       return (
         <Field
           key={field.name}
@@ -68,44 +69,6 @@ export default function FormEditMetadata({
           options={dockerImageOptions}
         />
       )
-      // return (
-      //   <>
-      //     <Field
-      //       {...getFieldContent('dockerImage', content.metadata.fields)}
-      //       component={Input}
-      //       name="metadata.dockerImage"
-      //       options={dockerImageOptions}
-      //     />
-      //     {values.metadata.dockerImage === 'custom' && (
-      //       <>
-      //         <Field
-      //           {...getFieldContent(
-      //             'dockerImageCustom',
-      //             content.metadata.fields
-      //           )}
-      //           component={Input}
-      //           name="metadata.dockerImageCustom"
-      //         />
-      //         <Field
-      //           {...getFieldContent(
-      //             'dockerImageCustomTag',
-      //             content.metadata.fields
-      //           )}
-      //           component={Input}
-      //           name="metadata.dockerImageCustomTag"
-      //         />
-      //         <Field
-      //           {...getFieldContent(
-      //             'dockerImageCustomEntrypoint',
-      //             content.metadata.fields
-      //           )}
-      //           component={Input}
-      //           name="metadata.dockerImageCustomEntrypoint"
-      //         />
-      //       </>
-      //     )}
-      //   </>
-      // )
     } else {
       return (
         <Field
@@ -122,45 +85,6 @@ export default function FormEditMetadata({
       )
     }
   })
-
-  if (isComputeDataset) {
-    // push the docker image options
-    // fields.push(
-    //   <>
-    //     <Field
-    //       {...getFieldContent('dockerImage', content.metadata.fields)}
-    //       component={Input}
-    //       name="metadata.dockerImage"
-    //       options={dockerImageOptions}
-    //     />
-    //     {values.metadata.dockerImage === 'custom' && (
-    //       <>
-    //         <Field
-    //           {...getFieldContent('dockerImageCustom', content.metadata.fields)}
-    //           component={Input}
-    //           name="metadata.dockerImageCustom"
-    //         />
-    //         <Field
-    //           {...getFieldContent(
-    //             'dockerImageCustomTag',
-    //             content.metadata.fields
-    //           )}
-    //           component={Input}
-    //           name="metadata.dockerImageCustomTag"
-    //         />
-    //         <Field
-    //           {...getFieldContent(
-    //             'dockerImageCustomEntrypoint',
-    //             content.metadata.fields
-    //           )}
-    //           component={Input}
-    //           name="metadata.dockerImageCustomEntrypoint"
-    //         />
-    //       </>
-    //     )}
-    //   </>
-    // )
-  }
 
   return (
     <Form>

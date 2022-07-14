@@ -39,6 +39,7 @@ export default function Edit({
   const [success, setSuccess] = useState<string>()
   const [error, setError] = useState<string>()
   const isComputeType = asset?.services[0]?.type === 'compute'
+  const isAlgorithm = asset?.metadata.type === 'algorithm'
   const hasFeedback = error || success
 
   console.log(
@@ -46,8 +47,7 @@ export default function Edit({
     getInitialValues(
       asset?.metadata,
       asset?.services[0]?.timeout,
-      asset?.accessDetails?.price,
-      isComputeType
+      asset?.accessDetails?.price
     )
   )
 
@@ -81,7 +81,7 @@ export default function Edit({
         values.links[0].valid && [sanitizeUrl(values.links[0].url)]
       // TODO: make a conditional to check if asset is an algorithm
       let updatedMetadata: Metadata
-      if (isComputeType) {
+      if (isAlgorithm) {
         updatedMetadata = {
           ...asset.metadata,
           name: values.name,
@@ -193,8 +193,7 @@ export default function Edit({
       initialValues={getInitialValues(
         asset?.metadata,
         asset?.services[0]?.timeout,
-        asset?.accessDetails?.price,
-        isComputeType
+        asset?.accessDetails?.price
       )}
       validationSchema={validationSchema}
       onSubmit={async (values, { resetForm }) => {
@@ -225,6 +224,7 @@ export default function Edit({
               data={content.form.data}
               showPrice={asset?.accessDetails?.type === 'fixed'}
               isComputeDataset={isComputeType}
+              isAlgorithm={isAlgorithm}
             />
 
             <Web3Feedback

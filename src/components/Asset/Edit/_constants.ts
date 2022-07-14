@@ -20,29 +20,17 @@ export const validationSchema = Yup.object().shape({
 export function getInitialValues(
   metadata: Metadata,
   timeout: number,
-  price: string,
-  isComputeType: boolean
+  price: string
 ): Partial<MetadataEditForm> {
-  return isComputeType
-    ? {
-        name: metadata?.name,
-        description: metadata?.description,
-        price,
-        links: metadata?.links,
-        files: '',
-        timeout: secondsToString(timeout),
-        author: metadata?.author
-        // algorithm: metadata?.algorithm // TODO: remove this
-      }
-    : {
-        name: metadata?.name,
-        description: metadata?.description,
-        price,
-        links: metadata?.links,
-        files: '',
-        timeout: secondsToString(timeout),
-        author: metadata?.author
-      }
+  return {
+    name: metadata?.name,
+    description: metadata?.description,
+    price,
+    links: metadata?.links,
+    files: '',
+    timeout: secondsToString(timeout),
+    author: metadata?.author
+  }
 }
 
 export const computeSettingsValidationSchema = Yup.object().shape({
