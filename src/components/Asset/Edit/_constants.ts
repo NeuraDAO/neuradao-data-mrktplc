@@ -12,23 +12,37 @@ export const validationSchema = Yup.object().shape({
   links: Yup.array<any[]>().nullable(),
   files: Yup.array<FileInfo[]>().nullable(),
   timeout: Yup.string().required('Required'),
-  author: Yup.string().nullable()
+  author: Yup.string().nullable(),
+  algorithm: Yup.array<any[]>().nullable()
+  // TODO: add validation for algorithm
 })
 
 export function getInitialValues(
   metadata: Metadata,
   timeout: number,
-  price: string
+  price: string,
+  isComputeType: boolean
 ): Partial<MetadataEditForm> {
-  return {
-    name: metadata?.name,
-    description: metadata?.description,
-    price,
-    links: metadata?.links,
-    files: '',
-    timeout: secondsToString(timeout),
-    author: metadata?.author
-  }
+  return isComputeType
+    ? {
+        name: metadata?.name,
+        description: metadata?.description,
+        price,
+        links: metadata?.links,
+        files: '',
+        timeout: secondsToString(timeout),
+        author: metadata?.author,
+        algorithm: metadata?.algorithm
+      }
+    : {
+        name: metadata?.name,
+        description: metadata?.description,
+        price,
+        links: metadata?.links,
+        files: '',
+        timeout: secondsToString(timeout),
+        author: metadata?.author
+      }
 }
 
 export const computeSettingsValidationSchema = Yup.object().shape({

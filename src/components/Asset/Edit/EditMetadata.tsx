@@ -40,6 +40,16 @@ export default function Edit({
   const isComputeType = asset?.services[0]?.type === 'compute'
   const hasFeedback = error || success
 
+  console.log(
+    '[initial values]',
+    getInitialValues(
+      asset?.metadata,
+      asset?.services[0]?.timeout,
+      asset?.accessDetails?.price,
+      isComputeType
+    )
+  )
+
   async function updateFixedPrice(newPrice: string) {
     const config = getOceanConfig(asset.chainId)
 
@@ -68,13 +78,36 @@ export default function Edit({
       let updatedFiles = asset.services[0].files
       const linksTransformed = values.links?.length &&
         values.links[0].valid && [sanitizeUrl(values.links[0].url)]
-      const updatedMetadata: Metadata = {
-        ...asset.metadata,
-        name: values.name,
-        description: values.description,
-        links: linksTransformed,
-        author: values.author
+      // TODO: make a conditional to check if asset is an algorithm
+      let updatedMetadata: Metadata
+      if (isComputeType) {
+        updatedMetadata = {
+          ...asset.metadata,
+          name: values.name,
+          description: values.description,
+          links: linksTransformed,
+          author: values.author,
+          algorithm: values.algorithm
+        }
+      } else {
+        updatedMetadata = {
+          ...asset.metadata,
+          name: values.name,
+          description: values.description,
+          links: linksTransformed,
+          author: values.author
+          // algorithm: values.algorithm,
+        }
       }
+
+      // const updatedMetadata: Metadata = {
+      //   ...asset.metadata,
+      //   name: values.name,
+      //   description: values.description,
+      //   links: linksTransformed,
+      //   author: values.author
+      //   // algorithm: values.algorithm,
+      // }
 
       asset?.accessDetails?.type === 'fixed' &&
         values.price !== asset.accessDetails.price &&
@@ -146,7 +179,8 @@ export default function Edit({
       initialValues={getInitialValues(
         asset?.metadata,
         asset?.services[0]?.timeout,
-        asset?.accessDetails?.price
+        asset?.accessDetails?.price,
+        isComputeType
       )}
       validationSchema={validationSchema}
       onSubmit={async (values, { resetForm }) => {

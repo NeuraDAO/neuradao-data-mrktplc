@@ -49,6 +49,7 @@ export default function MetadataFields(): ReactElement {
       checked: values.metadata.dockerImage === `${preset.image}:${preset.tag}`
     }))
 
+  // where is this in edit form?
   useEffect(() => {
     setFieldValue(
       'services[0].access',
