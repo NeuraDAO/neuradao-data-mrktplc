@@ -13,7 +13,7 @@ export const validationSchema = Yup.object().shape({
   files: Yup.array<FileInfo[]>().nullable(),
   timeout: Yup.string().required('Required'),
   author: Yup.string().nullable(),
-  algorithm: Yup.array<any[]>().nullable()
+  dockerImage: Yup.string().nullable()
   // TODO: add validation for algorithm
 })
 

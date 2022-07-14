@@ -27,7 +27,7 @@ export default function FormEditMetadata({
   isAlgorithm: boolean
 }): ReactElement {
   const { oceanConfig } = useAsset()
-  console.log('[data]', data)
+  // console.log('[data]', data)
 
   // This component is handled by Formik so it's not rendered like a "normal" react component,
   // so handleTimeoutCustomOption is called only once.
