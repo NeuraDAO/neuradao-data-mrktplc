@@ -87,7 +87,7 @@ export default function Edit({
           description: values.description,
           links: linksTransformed,
           author: values.author,
-          algorithm: values.algorithm
+          algorithm: values.algorithm // this is supposed to be dockerImage according to index.tsx in Publish/Metadata
         }
       } else {
         updatedMetadata = {

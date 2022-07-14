@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react'
-import { Field, Form } from 'formik'
+import { Field, Form, useFormikContext } from 'formik'
 import Input, { InputProps } from '@shared/FormInput'
 import FormActions from './FormActions'
 import { useAsset } from '@context/Asset'
 import { getFieldContent } from '@utils/form'
+import { algorithmContainerPresets } from './_constants'
 
 export function checkIfTimeoutInPredefinedValues(
   timeout: string,
@@ -31,6 +32,7 @@ export default function FormEditMetadata({
   // so handleTimeoutCustomOption is called only once.
   // https://github.com/oceanprotocol/market/pull/324#discussion_r561132310
   // if (data && values) handleTimeoutCustomOption(data, values)
+  const { values, setFieldValue } = useFormikContext<FormPublishData>()
 
   const timeoutOptionsArray = data.filter(
     (field) => field.name === 'timeout'
@@ -43,13 +45,67 @@ export default function FormEditMetadata({
     timeoutOptionsArray.push('Forever')
   }
 
+  const dockerImageOptions: BoxSelectionOption[] =
+    algorithmContainerPresets.map((preset) => ({
+      name: `${preset.image}:${preset.tag}`,
+      title: `${preset.image}:${preset.tag}`,
+      checked: values.dockerImage === `${preset.image}:${preset.tag}`
+    }))
+
   // TODO: need to add algorithm prop in editMetadata.json => data object
   const fields = data.map((field: InputProps) => {
     if (
       (!showPrice && field.name === 'price') ||
-      field.name.indexOf('docker') !== -1
+      (field.name.indexOf('docker') !== -1 && !isComputeDataset)
     ) {
       return null
+    } else if (field.name.indexOf('docker') !== -1 && isComputeDataset) {
+      return (
+        <Field
+          key={field.name}
+          {...field}
+          component={Input}
+          options={dockerImageOptions}
+        />
+      )
+      // return (
+      //   <>
+      //     <Field
+      //       {...getFieldContent('dockerImage', content.metadata.fields)}
+      //       component={Input}
+      //       name="metadata.dockerImage"
+      //       options={dockerImageOptions}
+      //     />
+      //     {values.metadata.dockerImage === 'custom' && (
+      //       <>
+      //         <Field
+      //           {...getFieldContent(
+      //             'dockerImageCustom',
+      //             content.metadata.fields
+      //           )}
+      //           component={Input}
+      //           name="metadata.dockerImageCustom"
+      //         />
+      //         <Field
+      //           {...getFieldContent(
+      //             'dockerImageCustomTag',
+      //             content.metadata.fields
+      //           )}
+      //           component={Input}
+      //           name="metadata.dockerImageCustomTag"
+      //         />
+      //         <Field
+      //           {...getFieldContent(
+      //             'dockerImageCustomEntrypoint',
+      //             content.metadata.fields
+      //           )}
+      //           component={Input}
+      //           name="metadata.dockerImageCustomEntrypoint"
+      //         />
+      //       </>
+      //     )}
+      //   </>
+      // )
     } else {
       return (
         <Field
