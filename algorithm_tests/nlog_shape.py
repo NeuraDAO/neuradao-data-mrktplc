@@ -49,7 +49,7 @@ def log_shape(job_details):
     """ Now, count the lines of the first file in first did """
     first_did = job_details['dids'][0]
     filename = job_details['files'][first_did][0]
-    mne.io.read_raw_fif(filename, preload=True)
+    mne.io.read_raw_edf(filename, preload=True)
     raw_array = raw[:][0]
     # stats = [np.mean(raw_array), np.std(raw_array), np.var(raw_array)]
 
