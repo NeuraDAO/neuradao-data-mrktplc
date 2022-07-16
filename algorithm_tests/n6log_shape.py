@@ -4,6 +4,7 @@ import numpy as np
 import os
 import time
 import json
+import tempfile
 
 def get_job_details():
     """Reads in metadata information about assets used by the algo"""
@@ -39,8 +40,6 @@ def get_job_details():
         job['algo']['ddo_path'] = '/data/ddos/' + algo_did
     return job
 
-
-
 def log_shape(job_details):
     """Executes the line counter based on inputs"""
     print('Starting compute job with the following input information:')
@@ -49,15 +48,25 @@ def log_shape(job_details):
     """ Now, count the lines of the first file in first did """
     first_did = job_details['dids'][0]
     filename = job_details['files'][first_did][0]
-    mne.io.read_raw_edf(filename, preload=True)
+
+    bin_data = open(filename, 'rb').read()
+    temp = tempfile.NamedTemporaryFile(suffix='.edf')
+
+    temp.write(bin_data)
+    # with open("data.edf", "wb") as f:
+    #     f.write(bin_data)
+
+    raw = mne.io.read_raw_edf(temp.name, preload=True)
     raw_array = raw[:][0]
     # stats = [np.mean(raw_array), np.std(raw_array), np.var(raw_array)]
 
-    f = open("/data/outputs/result", "w")
-    f.write(str(raw_array.shape))
+    print(raw_array.shape)
+
+    f = open("/data/outputs/result.txt", "w")
+    f.write(str("hello world"))
+        
     f.close()
-
-
+    temp.close()
 
 if __name__ == '__main__':
     log_shape(get_job_details())
