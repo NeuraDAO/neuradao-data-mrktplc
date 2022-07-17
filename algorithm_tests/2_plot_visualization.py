@@ -1,8 +1,6 @@
 # import pandas as pd
 # import numpy as np
-import os
-import time
-import json
+import shutil, tempfile, sys, json, os, time
 from nilearn.image.image import mean_img
 from nilearn.plotting import plot_epi, show
 
@@ -40,6 +38,11 @@ def get_job_details():
         job['algo']['ddo_path'] = '/data/ddos/' + algo_did
     return job
 
+def create_temporary_copy(path):
+  tmp = tempfile.NamedTemporaryFile(suffix='.nii.gz', delete=True)
+  shutil.copy2(path, tmp.name)
+  return tmp
+
 
 def log_job_details(job_details):
     """Executes the line counter based on inputs"""
@@ -47,11 +50,40 @@ def log_job_details(job_details):
     print(json.dumps(job_details, sort_keys=True, indent=4))
     first_did = job_details['dids'][0]
     filename = job_details['files'][first_did][0]
-   
-    # Compute the mean EPI: we do the mean along the axis 3, which is time
-    mean_haxby = mean_img(filename)
 
+    tmp_path = create_temporary_copy(filename)
+    # Compute the mean EPI: we do the mean along the axis 3, which is time
+    mean_haxby = mean_img(tmp_path.name)
     plot_epi(mean_haxby, output_file='/data/outputs/result.png', colorbar=True, cbar_tick_format="%i")
+
+    # try:
+    #     with open(filename, 'rb') as b, tempfile.NamedTemporaryFile(suffix='.nii.gz') as f:
+    #         bin_data = b.read()
+    #         f.write(bin_data)
+    
+    #         # Compute the mean EPI: we do the mean along the axis 3, which is time
+    #         mean_haxby = mean_img(f.name)
+    #         print(mean_haxby)
+    #         # try:
+    #         #     mean_haxby = mean_img(f.name)
+    #         # except:
+    #         #     print(".gz failed")
+    #         #     e = sys.exc_info()[0]
+    #         #     print(e)
+    #         #     try: 
+    #         #         mean_haxby = mean_img(filename +".nii.gz")
+    #         #     except:
+    #         #         print(".nii.gz failed")
+    #         #         e = sys.exc_info()[0]
+    #         #         print(e)
+    #         #         raise e 
+
+    #         plot_epi(mean_haxby, output_file='/data/outputs/result.png', colorbar=True, cbar_tick_format="%i")
+    # except:
+    #     print(".nii.gz failed")
+    #     e = sys.exc_info()[0]
+    #     print(e)
+
 
 def list_files(startpath):
     for root, dirs, files in os.walk(startpath):
