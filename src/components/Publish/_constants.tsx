@@ -119,7 +119,7 @@ export const algorithmContainerPresets: MetadataAlgorithmContainer[] = [
     tag: 'latest',
     entrypoint: 'python3.8 $ALGO',
     checksum:
-      'sha256:25b2f7c737d0d7ef88e4f2316060b67fa57c8926878d53bf045f837bccc8150b'
+      'sha256:a981ed6282271fc5492c382cd11d5045641880f738c05a855ed6de8d0eecea8f'
   },
   {
     entrypoint: 'python3.7 $ALGO',

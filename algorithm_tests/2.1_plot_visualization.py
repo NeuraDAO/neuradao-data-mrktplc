@@ -3,6 +3,10 @@
 import shutil, tempfile, sys, json, os, time
 from nilearn.image.image import mean_img
 from nilearn.plotting import plot_epi, show
+from nilearn.masking import compute_epi_mask
+from nilearn.plotting import plot_roi
+from nilearn.masking import apply_mask
+import matplotlib.pyplot as plt
 
 def get_job_details():
     """Reads in metadata information about assets used by the algo"""
@@ -54,36 +58,19 @@ def log_job_details(job_details):
     tmp_path = create_temporary_copy(filename)
     # Compute the mean EPI: we do the mean along the axis 3, which is time
     mean_haxby = mean_img(tmp_path.name)
-    plot_epi(mean_haxby, output_file='/data/outputs/result.png', colorbar=True, cbar_tick_format="%i")
+    plot_epi(mean_haxby, output_file='/data/outputs/meanepi.png', colorbar=True, cbar_tick_format="%i")
 
-    # try:
-    #     with open(filename, 'rb') as b, tempfile.NamedTemporaryFile(suffix='.nii.gz') as f:
-    #         bin_data = b.read()
-    #         f.write(bin_data)
-    
-    #         # Compute the mean EPI: we do the mean along the axis 3, which is time
-    #         mean_haxby = mean_img(f.name)
-    #         print(mean_haxby)
-    #         # try:
-    #         #     mean_haxby = mean_img(f.name)
-    #         # except:
-    #         #     print(".gz failed")
-    #         #     e = sys.exc_info()[0]
-    #         #     print(e)
-    #         #     try: 
-    #         #         mean_haxby = mean_img(filename +".nii.gz")
-    #         #     except:
-    #         #         print(".nii.gz failed")
-    #         #         e = sys.exc_info()[0]
-    #         #         print(e)
-    #         #         raise e 
+    mask_img = compute_epi_mask(tmp_path.name)
+    plot_roi(mask_img, mean_haxby, output_file='data/outputs/mask.png')
 
-    #         plot_epi(mean_haxby, output_file='/data/outputs/result.png', colorbar=True, cbar_tick_format="%i")
-    # except:
-    #     print(".nii.gz failed")
-    #     e = sys.exc_info()[0]
-    #     print(e)
-
+    masked_data = apply_mask(tmp_path.name, mask_img)
+    plt.figure(figsize=(7, 5))
+    plt.plot(masked_data[:150, :2])
+    plt.xlabel('Time [TRs]', fontsize=16)
+    plt.ylabel('Intensity', fontsize=16)
+    plt.xlim(0, 150)
+    plt.subplots_adjust(bottom=.12, top=.95, right=.95, left=.12)
+    plt.savefig('data/outputs/maskedts.png')
 
 def list_files(startpath):
     for root, dirs, files in os.walk(startpath):
