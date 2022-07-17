@@ -56,17 +56,20 @@ def log_shape(job_details):
     # with open("data.edf", "wb") as f:
     #     f.write(bin_data)
 
-    raw = mne.io.read_raw_edf(temp.name, preload=True)
-    raw_array = raw[:][0]
-    # stats = [np.mean(raw_array), np.std(raw_array), np.var(raw_array)]
+    try:
+        raw = mne.io.read_raw_edf(temp.name)
+        raw_array = raw[:][0]
+        # stats = [np.mean(raw_array), np.std(raw_array), np.var(raw_array)]
 
-    print(raw_array.shape)
+        print(raw_array.shape)
 
-    f = open("/data/outputs/result.txt", "w")
-    f.write(str("hello world"))
-        
-    f.close()
-    temp.close()
+        f = open("/data/outputs/result.txt", "w")
+        f.write(str("hello world"))
+    except BaseException as err:
+        print(err)
+    finally:
+        f.close()
+        temp.close()
 
 if __name__ == '__main__':
     log_shape(get_job_details())
