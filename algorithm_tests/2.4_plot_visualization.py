@@ -43,7 +43,7 @@ def get_job_details():
     return job
 
 def create_temporary_copy(path):
-  tmp = tempfile.NamedTemporaryFile(suffix='.nii.gz', delete=True)
+  tmp = tempfile.NamedTemporaryFile(suffix='.nii.gz')
   shutil.copy2(path, tmp.name)
   return tmp
 
@@ -60,17 +60,19 @@ def log_job_details(job_details):
     mean_haxby = mean_img(tmp_path.name)
     plot_epi(mean_haxby, output_file='/data/outputs/meanepi.png', colorbar=True, cbar_tick_format="%i")
 
-    mask_img = compute_epi_mask(tmp_path.name)
-    plot_roi(mask_img, mean_haxby, output_file='data/outputs/mask.png')
+    # mask_img = compute_epi_mask(tmp_path.name)
+    # plot_roi(mask_img, mean_haxby, output_file='data/outputs/mask.png')
 
-    masked_data = apply_mask(tmp_path.name, mask_img)
-    plt.figure(figsize=(7, 5))
-    plt.plot(masked_data[:150, :2])
-    plt.xlabel('Time [TRs]', fontsize=16)
-    plt.ylabel('Intensity', fontsize=16)
-    plt.xlim(0, 150)
-    plt.subplots_adjust(bottom=.12, top=.95, right=.95, left=.12)
-    plt.savefig('data/outputs/maskedts.png')
+    # masked_data = apply_mask(tmp_path.name, mask_img)
+    # plt.figure(figsize=(7, 5))
+    # plt.plot(masked_data[:150, :2])
+    # plt.xlabel('Time [TRs]', fontsize=16)
+    # plt.ylabel('Intensity', fontsize=16)
+    # plt.xlim(0, 150)
+    # plt.subplots_adjust(bottom=.12, top=.95, right=.95, left=.12)
+    # plt.savefig('data/outputs/maskedts.png')
+
+    tmp_path.close()
 
 def list_files(startpath):
     for root, dirs, files in os.walk(startpath):
