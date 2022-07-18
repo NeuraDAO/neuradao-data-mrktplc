@@ -1,6 +1,7 @@
 # import pandas as pd
 # import numpy as np
 import shutil, tempfile, sys, json, os, time
+from zipfile import ZipFile
 from nilearn.image.image import mean_img
 from nilearn.plotting import plot_epi, show
 from nilearn.masking import compute_epi_mask
@@ -55,10 +56,43 @@ def log_job_details(job_details):
     first_did = job_details['dids'][0]
     filename = job_details['files'][first_did][0]
 
-    tmp_path = create_temporary_copy(filename)
-    # Compute the mean EPI: we do the mean along the axis 3, which is time
-    mean_haxby = mean_img(tmp_path.name)
-    plot_epi(mean_haxby, output_file='/data/outputs/meanepi.png', colorbar=True, cbar_tick_format="%i")
+    try:
+        with tempfile.NamedTemporaryFile(suffix='.nii.gz') as tmp, tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp2, tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp3, ZipFile('/data/outputs/results.zip', 'w') as zf:
+            shutil.copy2(filename, tmp.name)
+            # Compute the mean EPI: we do the mean along the axis 3, which is time
+            mean_haxby = mean_img(tmp.name)
+            plot_epi(mean_haxby, output_file=tmp2.name, colorbar=True, cbar_tick_format="%i")
+
+            mask_img = compute_epi_mask(tmp.name)
+            plot_roi(mask_img, mean_haxby, output_file=tmp3.name)
+
+            zf.write(tmp2.name, 'mean_haxby.png')
+            zf.write(tmp3.name, 'mask_haxby.png')
+
+    except:
+        e = sys.exc_info()[0]
+        print('error', e)
+
+    # try:
+    #     tmp_path = create_temporary_copy(filename)
+    #     # Compute the mean EPI: we do the mean along the axis 3, which is time
+    #     mean_haxby = mean_img(tmp_path.name)
+    #     # plot_epi(mean_haxby, output_file='/data/outputs/meanepi.png', colorbar=True, cbar_tick_format="%i")
+
+    #     mask_img = compute_epi_mask(tmp_path.name)
+    #     # plot_roi(mask_img, mean_haxby, output_file='data/outputs/mask.png')
+
+    #     masked_data = apply_mask(tmp_path.name, mask_img)
+    #     plt.figure(figsize=(7, 5))
+    #     plt.plot(masked_data[:150, :2])
+    #     plt.xlabel('Time [TRs]', fontsize=16)
+    #     plt.ylabel('Intensity', fontsize=16)
+    #     plt.xlim(0, 150)
+    #     plt.subplots_adjust(bottom=.12, top=.95, right=.95, left=.12)
+    #     plt.savefig('data/outputs/maskedts.png')
+    # except:
+    #     e = sys.exc_info()[0]
+    #     print('error', e)
 
     # mask_img = compute_epi_mask(tmp_path.name)
     # plot_roi(mask_img, mean_haxby, output_file='data/outputs/mask.png')
@@ -72,7 +106,7 @@ def log_job_details(job_details):
     # plt.subplots_adjust(bottom=.12, top=.95, right=.95, left=.12)
     # plt.savefig('data/outputs/maskedts.png')
 
-    tmp_path.close()
+    # tmp_path.close()
 
 def list_files(startpath):
     for root, dirs, files in os.walk(startpath):
