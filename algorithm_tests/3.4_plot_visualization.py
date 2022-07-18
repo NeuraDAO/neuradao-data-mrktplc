@@ -56,22 +56,34 @@ def log_job_details(job_details):
     first_did = job_details['dids'][0]
     filename = job_details['files'][first_did][0]
 
-    try:
-        with tempfile.NamedTemporaryFile(suffix='.nii.gz') as tmp, tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp2, tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp3, ZipFile('/data/outputs/results.zip', 'w') as zf:
-            shutil.copy2(filename, tmp.name)
-            # Compute the mean EPI: we do the mean along the axis 3, which is time
-            mean_haxby = mean_img(tmp.name)
-            plot_epi(mean_haxby, output_file=tmp2.name, colorbar=True, cbar_tick_format="%i")
+    with tempfile.NamedTemporaryFile(suffix='.nii.gz') as tmp, ZipFile('/data/outputs/results.zip', 'w') as zf:
+        shutil.copy2(filename, tmp.name)
+        # Compute the mean EPI: we do the mean along the axis 3, which is time
+        mean_haxby = mean_img(tmp.name)
+        plot_epi(mean_haxby, output_file='/data/logs/result1.png', colorbar=True, cbar_tick_format="%i")
 
-            mask_img = compute_epi_mask(tmp.name)
-            plot_roi(mask_img, mean_haxby, output_file=tmp3.name)
+        mask_img = compute_epi_mask(tmp.name)
+        plot_roi(mask_img, mean_haxby, output_file='/data/logs/result2.png')
 
-            zf.write(tmp2.name, 'mean_haxby.png')
-            zf.write(tmp3.name, 'mask_haxby.png')
+        zf.write('/data/logs/result1.png', 'mean_haxby.png')
+        zf.write('/data/logs/result2.png', 'mask_haxby.png')
 
-    except:
-        e = sys.exc_info()[0]
-        print('error', e)
+    # try:
+    # with tempfile.NamedTemporaryFile(suffix='.nii.gz') as tmp, tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp2, tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp3, ZipFile('/data/outputs/results.zip', 'w') as zf:
+    #     shutil.copy2(filename, tmp.name)
+    #     # Compute the mean EPI: we do the mean along the axis 3, which is time
+    #     mean_haxby = mean_img(tmp.name)
+    #     plot_epi(mean_haxby, output_file=tmp2.name, colorbar=True, cbar_tick_format="%i")
+
+    #     mask_img = compute_epi_mask(tmp.name)
+    #     plot_roi(mask_img, mean_haxby, output_file=tmp3.name)
+
+    #     zf.write(tmp2.name, 'mean_haxby.png')
+    #     zf.write(tmp3.name, 'mask_haxby.png')
+
+    # except:
+    #     e = sys.exc_info()[0]
+    #     print('error', e)
 
     # try:
     #     tmp_path = create_temporary_copy(filename)

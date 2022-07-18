@@ -22,6 +22,9 @@ import useNetworkMetadata, {
   NetworkType
 } from '../@hooks/useNetworkMetadata'
 import { useMarketMetadata } from './MarketMetadata'
+import { Web3Auth } from '@web3auth/web3auth'
+import { CHAIN_NAMESPACES, SafeEventEmitterProvider } from '@web3auth/base'
+// import RPC from './evm'
 
 interface Web3ProviderValue {
   web3: Web3
@@ -42,6 +45,9 @@ interface Web3ProviderValue {
   connect: () => Promise<void>
   logout: () => Promise<void>
 }
+
+const clientId =
+  'BBMi0clHVAtljKGxkqwRTvQwoVDxEdXICDXwdEb2HowS8qBBH237zSYS6RMNxadDN8yeWfmV1tTGEL37Jk22zRI' // get from https://dashboard.web3auth.io
 
 const web3ModalTheme = {
   background: 'var(--background-body)',
@@ -110,6 +116,44 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
     ocean: '0'
   })
   const [isSupportedOceanNetwork, setIsSupportedOceanNetwork] = useState(true)
+
+  // const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null)
+  // const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
+  //   null
+  // )
+
+  // useEffect(() => {
+  //   const init = async () => {
+  //     try {
+  //       const web3auth = new Web3Auth({
+  //         clientId,
+  //         chainConfig: {
+  //           chainNamespace: CHAIN_NAMESPACES.EIP155,
+  //           chainId: '4',
+  //           rpcTarget:
+  //             'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' // This is the mainnet RPC we have added, please pass on your own endpoint while creating an app
+  //         }
+  //       })
+
+  //       setWeb3auth(web3auth)
+
+  //       await web3auth.initModal()
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+
+  //   init()
+  // }, [])
+
+  // const login = async () => {
+  //   if (!web3auth) {
+  //     console.log('web3auth not initialized yet')
+  //     return
+  //   }
+  //   const web3authProvider = await web3auth.connect()
+  //   setProvider(web3authProvider)
+  // }
 
   // -----------------------------------
   // Helper: connect to web3
