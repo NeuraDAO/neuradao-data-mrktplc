@@ -101,7 +101,7 @@ export async function queryMetadata(
       { cancelToken }
     )
     {
-      console.log({ metadataCacheUri })
+      console.log({ metadataCacheUri, response })
     }
     if (!response || response.status !== 200 || !response.data) return
     return transformQueryResult(response.data, query.from, query.size)
@@ -123,6 +123,7 @@ export async function retrieveAsset(
       `${metadataCacheUri}/api/aquarius/assets/ddo/${did}`,
       { cancelToken }
     )
+    console.log({ response })
     if (!response || response.status !== 200 || !response.data) return
 
     const data = { ...response.data }

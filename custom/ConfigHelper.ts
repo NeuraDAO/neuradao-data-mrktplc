@@ -6,9 +6,9 @@ const configHelperNetworksBase: Config = {
   chainId: null,
   network: 'unknown',
   // metadataCacheUri: 'https://v4.aquarius.oceanprotocol.com',
-  metadataCacheUri: 'http://138.197.136.215:5000',
-  nodeUri: 'http://127.0.0.1:8545',
-  providerUri: 'http://127.0.0.1:8030',
+  metadataCacheUri: 'http://138.197.144.53:5000',
+  nodeUri: 'http://138.197.144.5:8545',
+  providerUri: 'http://138.197.144.5:8030',
   subgraphUri: null,
   explorerUri: null,
   oceanTokenAddress: null,
@@ -32,7 +32,7 @@ export const configHelperNetworks: Config[] = [
     ...configHelperNetworksBase,
     chainId: 8996,
     network: 'development',
-    metadataCacheUri: 'http://127.0.0.1:5000',
+    metadataCacheUri: 'http://138.197.144.5:5000',
     providerUri: 'http://172.15.0.4:8030'
   },
   {
@@ -50,8 +50,8 @@ export const configHelperNetworks: Config[] = [
     chainId: 4,
     network: 'rinkeby',
     nodeUri: 'https://rinkeby.infura.io/v3/c93bc666c87a4c71b18eb76d79201a3c',
-    providerUri: 'http://138.197.136.215:8030',
-    subgraphUri: 'http://138.197.136.215:9000',
+    providerUri: 'http://138.197.144.53:8030',
+    subgraphUri: 'http://138.197.144.53:9000',
     explorerUri: 'https://rinkeby.etherscan.io',
     gasFeeMultiplier: 1.1
   },

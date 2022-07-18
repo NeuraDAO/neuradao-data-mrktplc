@@ -6,11 +6,11 @@ module.exports = {
   // const { appConfig } = useMarketMetadata()
   // return appConfig.metadataCacheUri
   metadataCacheUri:
-    process.env.NEXT_PUBLIC_METADATACACHE_URI || 'http://138.197.136.215:5000',
+    process.env.NEXT_PUBLIC_METADATACACHE_URI || 'http://138.197.144.53:5000',
 
   v3MetadataCacheUri:
     process.env.NEXT_PUBLIC_V3_METADATACACHE_URI ||
-    'http://138.197.136.215:5000',
+    'http://138.197.144.53:5000',
 
   v3MarketUri:
     process.env.NEXT_PUBLIC_V3_MARKET_URI ||

@@ -70,6 +70,7 @@ function AssetProvider({
       LoggerInstance.log('[asset] Fetching asset...')
       setLoading(true)
       const asset = await retrieveAsset(did, token)
+      console.log({ asset, did, token })
 
       if (!asset) {
         setIsV3Asset(await checkV3Asset(did, token))

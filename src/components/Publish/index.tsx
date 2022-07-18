@@ -34,6 +34,7 @@ export default function PublishPage({
   const scrollToRef = useRef()
   const nftFactory = useNftFactory()
   const newAbortController = useAbortController()
+  console.log({ nftFactory })
 
   // This `feedback` state is auto-synced into Formik context under `values.feedback`
   // for use in other components. Syncing defined in ./Steps.tsx child component.
