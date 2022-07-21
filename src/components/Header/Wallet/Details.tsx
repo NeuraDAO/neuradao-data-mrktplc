@@ -77,7 +77,8 @@ export default function Details(): ReactElement {
               style="text"
               size="small"
               onClick={async () => {
-                connect()
+                await logout()
+                await connect()
               }}
             >
               Switch Wallet

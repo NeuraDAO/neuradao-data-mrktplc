@@ -371,10 +371,11 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   // Logout helper
   // -----------------------------------
   async function logout() {
-    if (web3 && web3.currentProvider && (web3.currentProvider as any).close) {
-      await (web3.currentProvider as any).close()
-    }
+    // if (web3 && web3.currentProvider && (web3.currentProvider as any).close) {
+    //   await (web3.currentProvider as any).close()
+    // }
     await web3Auth.logout()
+    setWeb3auth(null)
     setWeb3Provider(null)
   }
   // -----------------------------------
