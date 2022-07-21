@@ -22,8 +22,9 @@ import useNetworkMetadata, {
   NetworkType
 } from '../@hooks/useNetworkMetadata'
 import { useMarketMetadata } from './MarketMetadata'
-import { Web3Auth } from '@web3auth/web3auth'
+// import { Web3Auth } from '@web3auth/web3auth'
 import { CHAIN_NAMESPACES, SafeEventEmitterProvider } from '@web3auth/base'
+import dynamic from 'next/dynamic'
 // import RPC from './evm'
 
 interface Web3ProviderValue {
@@ -252,6 +253,10 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
 
     const init = async () => {
       try {
+        // const DynamicWeb3Auth = dynamic(() =>
+        //   import('@web3auth/web3auth').then((mod) => mod.Web3Auth)
+        // )
+        const Web3Auth = await (await import('@web3auth/web3auth')).Web3Auth
         const web3auth = new Web3Auth({
           clientId,
           chainConfig: {
