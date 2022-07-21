@@ -11,7 +11,7 @@ import styles from './Details.module.css'
 export default function Details(): ReactElement {
   const {
     web3ProviderInfo,
-    web3Modal,
+    web3Auth,
     connect,
     logout,
     networkData,
@@ -77,7 +77,6 @@ export default function Details(): ReactElement {
               style="text"
               size="small"
               onClick={async () => {
-                await web3Modal?.clearCachedProvider()
                 connect()
               }}
             >

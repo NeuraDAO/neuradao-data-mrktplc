@@ -29,7 +29,7 @@ import { CHAIN_NAMESPACES, SafeEventEmitterProvider } from '@web3auth/base'
 interface Web3ProviderValue {
   web3: Web3
   web3Provider: any
-  web3Modal: Web3Modal
+  web3Auth: Web3Auth
   web3ProviderInfo: IProviderInfo
   accountId: string
   accountEns: string
@@ -49,46 +49,46 @@ interface Web3ProviderValue {
 const clientId =
   'BBMi0clHVAtljKGxkqwRTvQwoVDxEdXICDXwdEb2HowS8qBBH237zSYS6RMNxadDN8yeWfmV1tTGEL37Jk22zRI' // get from https://dashboard.web3auth.io
 
-const web3ModalTheme = {
-  background: 'var(--background-body)',
-  main: 'var(--font-color-heading)',
-  secondary: 'var(--brand-grey-light)',
-  border: 'var(--border-color)',
-  hover: 'var(--background-highlight)'
-}
+// const web3ModalTheme = {
+//   background: 'var(--background-body)',
+//   main: 'var(--font-color-heading)',
+//   secondary: 'var(--brand-grey-light)',
+//   border: 'var(--border-color)',
+//   hover: 'var(--background-highlight)'
+// }
 
-// HEADS UP! We inline-require some packages so the SSR build does not break.
-// We only need them client-side.
-const providerOptions = isBrowser
-  ? {
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          infuraId,
-          rpc: {
-            137: 'https://polygon-rpc.com',
-            80001: 'https://rpc-mumbai.matic.today'
-          }
-        }
-      }
-      // torus: {
-      //   package: require('@toruslabs/torus-embed')
-      //   // options: {
-      //   //   networkParams: {
-      //   //     host: oceanConfig.url, // optional
-      //   //     chainId: 1337, // optional
-      //   //     networkId: 1337 // optional
-      //   //   }
-      //   // }
-      // }
-    }
-  : {}
+// // HEADS UP! We inline-require some packages so the SSR build does not break.
+// // We only need them client-side.
+// const providerOptions = isBrowser
+//   ? {
+//       walletconnect: {
+//         package: WalletConnectProvider,
+//         options: {
+//           infuraId,
+//           rpc: {
+//             137: 'https://polygon-rpc.com',
+//             80001: 'https://rpc-mumbai.matic.today'
+//           }
+//         }
+//       }
+//       // torus: {
+//       //   package: require('@toruslabs/torus-embed')
+//       //   // options: {
+//       //   //   networkParams: {
+//       //   //     host: oceanConfig.url, // optional
+//       //   //     chainId: 1337, // optional
+//       //   //     networkId: 1337 // optional
+//       //   //   }
+//       //   // }
+//       // }
+//     }
+//   : {}
 
-export const web3ModalOpts = {
-  cacheProvider: true,
-  providerOptions,
-  theme: web3ModalTheme
-}
+// export const web3ModalOpts = {
+//   cacheProvider: true,
+//   providerOptions,
+//   theme: web3ModalTheme
+// }
 
 const refreshInterval = 20000 // 20 sec.
 
@@ -99,8 +99,9 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   const { appConfig } = useMarketMetadata()
 
   const [web3, setWeb3] = useState<Web3>()
-  const [web3Provider, setWeb3Provider] = useState<any>()
-  const [web3Modal, setWeb3Modal] = useState<Web3Modal>()
+  const [web3Provider, setWeb3Provider] =
+    useState<SafeEventEmitterProvider | null>(null)
+  // const [web3Modal, setWeb3Modal] = useState<Web3Modal>()
   const [web3ProviderInfo, setWeb3ProviderInfo] = useState<IProviderInfo>()
   const [networkId, setNetworkId] = useState<number>()
   const [chainId, setChainId] = useState<number>()
@@ -117,49 +118,44 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   })
   const [isSupportedOceanNetwork, setIsSupportedOceanNetwork] = useState(true)
 
-  // const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null)
+  const [web3Auth, setWeb3auth] = useState<Web3Auth | null>(null)
   // const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(
   //   null
   // )
 
-  // useEffect(() => {
-  //   const init = async () => {
-  //     try {
-  //       const web3auth = new Web3Auth({
-  //         clientId,
-  //         chainConfig: {
-  //           chainNamespace: CHAIN_NAMESPACES.EIP155,
-  //           chainId: '4',
-  //           rpcTarget:
-  //             'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' // This is the mainnet RPC we have added, please pass on your own endpoint while creating an app
-  //         }
-  //       })
-
-  //       setWeb3auth(web3auth)
-
-  //       await web3auth.initModal()
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   }
-
-  //   init()
-  // }, [])
-
   // const login = async () => {
+  //   // put internals of this func into connect()
   //   if (!web3auth) {
   //     console.log('web3auth not initialized yet')
   //     return
   //   }
   //   const web3authProvider = await web3auth.connect()
-  //   setProvider(web3authProvider)
+  //   setWeb3Provider(web3authProvider)
+  // }
+
+  // const getUserInfo = async () => {
+  //   if (!web3auth) {
+  //     console.log('web3auth not initialized yet')
+  //     return
+  //   }
+  //   const user = await web3auth.getUserInfo()
+  //   console.log(user)
+  // }
+
+  // const logoutAuth = async () => {
+  //   if (!web3auth) {
+  //     console.log('web3auth not initialized yet')
+  //     return
+  //   }
+  //   await web3auth.logout()
+  //   setWeb3Provider(null)
   // }
 
   // -----------------------------------
   // Helper: connect to web3
   // -----------------------------------
   const connect = useCallback(async () => {
-    if (!web3Modal) {
+    if (!web3Auth) {
       setWeb3Loading(false)
       return
     }
@@ -167,10 +163,10 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
       setWeb3Loading(true)
       LoggerInstance.log('[web3] Connecting Web3...')
 
-      const provider = await web3Modal?.connect()
-      setWeb3Provider(provider)
+      const web3authProvider = await web3Auth.connect()
+      setWeb3Provider(web3authProvider)
 
-      const web3 = new Web3(provider)
+      const web3 = new Web3(web3authProvider as any)
       setWeb3(web3)
       LoggerInstance.log('[web3] Web3 created.', web3)
 
@@ -190,7 +186,7 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
     } finally {
       setWeb3Loading(false)
     }
-  }, [web3Modal])
+  }, [web3Auth])
 
   // -----------------------------------
   // Helper: Get user balance
@@ -238,38 +234,61 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   // Create initial Web3Modal instance
   // -----------------------------------
   useEffect(() => {
-    if (web3Modal) {
+    if (web3Auth) {
       setWeb3Loading(false)
       return
     }
 
-    async function init() {
-      // note: needs artificial await here so the log message is reached and output
-      const web3ModalInstance = await new Web3Modal(web3ModalOpts)
-      setWeb3Modal(web3ModalInstance)
-      LoggerInstance.log(
-        '[web3] Web3Modal instance created.',
-        web3ModalInstance
-      )
+    // async function init() {
+    //   // note: needs artificial await here so the log message is reached and output
+    //   const web3ModalInstance = await new Web3Modal(web3ModalOpts)
+    //   setWeb3Modal(web3ModalInstance)
+    //   LoggerInstance.log(
+    //     '[web3] Web3Modal instance created.',
+    //     web3ModalInstance
+    //   )
+    // }
+    // init()
+
+    const init = async () => {
+      try {
+        const web3auth = new Web3Auth({
+          clientId,
+          chainConfig: {
+            chainNamespace: CHAIN_NAMESPACES.EIP155,
+            chainId: '0x4',
+            rpcTarget:
+              'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' // This is the mainnet RPC we have added, please pass on your own endpoint while creating an app
+          }
+        })
+
+        setWeb3auth(web3auth)
+        LoggerInstance.log('[web3] Web3Modal instance created.', web3auth)
+
+        await web3auth.initModal()
+      } catch (error) {
+        console.error(error)
+      }
     }
+
     init()
-  }, [connect, web3Modal])
+  }, [connect, web3Auth])
 
   // -----------------------------------
   // Reconnect automatically for returning users
   // -----------------------------------
-  useEffect(() => {
-    if (!web3Modal?.cachedProvider) return
+  // useEffect(() => {
+  //   if (!web3Modal?.cachedProvider) return
 
-    async function connectCached() {
-      LoggerInstance.log(
-        '[web3] Connecting to cached provider: ',
-        web3Modal.cachedProvider
-      )
-      await connect()
-    }
-    connectCached()
-  }, [connect, web3Modal])
+  //   async function connectCached() {
+  //     LoggerInstance.log(
+  //       '[web3] Connecting to cached provider: ',
+  //       web3Modal.cachedProvider
+  //     )
+  //     await connect()
+  //   }
+  //   connectCached()
+  // }, [connect, web3Modal])
 
   // -----------------------------------
   // Get and set user balance
@@ -350,7 +369,8 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
     if (web3 && web3.currentProvider && (web3.currentProvider as any).close) {
       await (web3.currentProvider as any).close()
     }
-    await web3Modal.clearCachedProvider()
+    await web3Auth.logout()
+    setWeb3Provider(null)
   }
   // -----------------------------------
   // Get valid Networks and set isSupportedOceanNetwork
@@ -405,7 +425,7 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
       value={{
         web3,
         web3Provider,
-        web3Modal,
+        web3Auth,
         web3ProviderInfo,
         accountId,
         accountEns,
