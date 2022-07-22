@@ -68,7 +68,10 @@ const providerOptions = isBrowser
         }
       },
       torus: {
-        package: Torus, // required
+        package: Torus,
+        display: {
+          description: 'Recommended for web2 savvy users'
+        }, // required
         options: {
           network: 'rinkeby'
         }
