@@ -9,7 +9,7 @@ import Blockies from '@shared/atoms/Blockies'
 // Forward ref for Tippy.js
 // eslint-disable-next-line
 const Account = React.forwardRef((props, ref: any) => {
-  const { accountId, accountEns, web3Auth, connect } = useWeb3()
+  const { accountId, accountEns, web3Modal, connect } = useWeb3()
 
   async function handleActivation(e: FormEvent<HTMLButtonElement>) {
     // prevent accidentially submitting a form the button might be in

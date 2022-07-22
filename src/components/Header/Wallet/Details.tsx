@@ -11,7 +11,7 @@ import styles from './Details.module.css'
 export default function Details(): ReactElement {
   const {
     web3ProviderInfo,
-    web3Auth,
+    web3Modal,
     connect,
     logout,
     networkData,

@@ -23,12 +23,14 @@
     "storybook:build": "cross-env NODE_ENV=test build-storybook"
   },
   "dependencies": {
+    "@coinbase/wallet-sdk": "^3.4.0",
     "@coingecko/cryptoformat": "^0.5.4",
     "@loadable/component": "^5.15.2",
     "@oceanprotocol/art": "^3.2.0",
     "@oceanprotocol/lib": "^1.1.6",
     "@oceanprotocol/typographies": "^0.1.0",
     "@tippyjs/react": "^4.2.6",
+    "@toruslabs/torus-embed": "^1.27.2",
     "@urql/exchange-refocus": "^0.2.5",
     "@walletconnect/web3-provider": "^1.7.8",
     "@web3auth/base": "^1.1.1",
