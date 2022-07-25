@@ -7,7 +7,7 @@ import MetadataFields from './Metadata'
 import ServicesFields from './Services'
 import Preview from './Preview'
 import Submission from './Submission'
-import { ServiceComputeOptions } from '@oceanprotocol/lib'
+import { ServiceComputeOptions } from '@neuradao/ocean-lib'
 import contentFeedback from '../../../content/publish/feedback.json'
 
 export const wizardSteps: StepContent[] = [

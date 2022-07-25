@@ -8,7 +8,7 @@ import {
   queryMetadata
 } from '@utils/aquarius'
 import { getHighestLiquidityDatatokens } from '@utils/subgraph'
-import { Asset, LoggerInstance } from '@oceanprotocol/lib'
+import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
 import { useUserPreferences } from '@context/UserPreferences'
 import styles from './index.module.css'
 import { useIsMounted } from '@hooks/useIsMounted'

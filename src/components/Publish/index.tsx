@@ -14,7 +14,7 @@ import { Steps } from './Steps'
 import { FormPublishData } from './_types'
 import { useUserPreferences } from '@context/UserPreferences'
 import useNftFactory from '@hooks/contracts/useNftFactory'
-import { ProviderInstance, LoggerInstance, DDO } from '@oceanprotocol/lib'
+import { ProviderInstance, LoggerInstance, DDO } from '@neuradao/ocean-lib'
 import { getOceanConfig } from '@utils/ocean'
 import { validationSchema } from './_validation'
 import { useAbortController } from '@hooks/useAbortController'
@@ -278,6 +278,7 @@ export default function PublishPage({
       validationSchema={validationSchema}
       onSubmit={async (values) => {
         // kick off publishing
+        // console.log({ values })
         await handleSubmit(values)
       }}
     >

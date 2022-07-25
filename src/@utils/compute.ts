@@ -10,7 +10,7 @@ import {
   ProviderInstance,
   ComputeEnvironment,
   ComputeJob
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import { CancelToken } from 'axios'
 import { gql } from 'urql'
 import {

@@ -5,7 +5,7 @@ import { fetchData, getSubgraphUri } from '@utils/subgraph'
 import useNetworkMetadata, {
   filterNetworksByType
 } from '@hooks/useNetworkMetadata'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import styles from './index.module.css'
 import { FooterStatsValues_globalStatistics as FooterStatsValuesGlobalStatistics } from 'src/@types/subgraph/FooterStatsValues'
 import MarketStatsTooltip from './Tooltip'

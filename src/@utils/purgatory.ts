@@ -1,4 +1,4 @@
-import { Purgatory } from '@oceanprotocol/lib'
+import { Purgatory } from '@neuradao/ocean-lib'
 import { fetchData } from './fetch'
 
 const purgatoryUrl = 'https://market-purgatory.oceanprotocol.com/api/'

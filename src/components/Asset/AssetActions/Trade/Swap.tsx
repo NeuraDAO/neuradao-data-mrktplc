@@ -17,7 +17,7 @@ import {
   LoggerInstance,
   Pool,
   PoolPriceAndFees
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import { AssetExtended } from 'src/@types/AssetExtended'
 import { usePool } from '@context/Pool'
 import { MAX_DECIMALS } from '@utils/constants'

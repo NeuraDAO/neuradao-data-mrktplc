@@ -13,7 +13,7 @@ import {
   PoolCreationParams,
   Service,
   ZERO_ADDRESS
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import { mapTimeoutStringToSeconds } from '@utils/ddo'
 import { generateNftCreateData } from '@utils/nft'
 import { getEncryptedFiles } from '@utils/provider'

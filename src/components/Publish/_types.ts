@@ -1,4 +1,4 @@
-import { ServiceComputeOptions } from '@oceanprotocol/lib'
+import { ServiceComputeOptions } from '@neuradao/ocean-lib'
 import { NftMetadata } from '@utils/nft'
 import { ReactElement } from 'react'
 import { PriceOptions } from 'src/@types/Price'

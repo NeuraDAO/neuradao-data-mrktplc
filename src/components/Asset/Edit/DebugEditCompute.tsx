@@ -1,4 +1,4 @@
-import { Asset, ServiceComputeOptions } from '@oceanprotocol/lib'
+import { Asset, ServiceComputeOptions } from '@neuradao/ocean-lib'
 import React, { ReactElement, useEffect, useState } from 'react'
 import DebugOutput from '@shared/DebugOutput'
 import { useCancelToken } from '@hooks/useCancelToken'

@@ -1,5 +1,5 @@
 import { PoolInfo, PoolInfoUser } from '@context/Pool/_types'
-import { calcMaxExactOut, Pool } from '@oceanprotocol/lib'
+import { calcMaxExactOut, Pool } from '@neuradao/ocean-lib'
 import Decimal from 'decimal.js'
 import { PoolData_poolData as PoolData } from 'src/@types/subgraph/PoolData'
 

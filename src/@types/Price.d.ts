@@ -1,4 +1,4 @@
-import { ProviderFees } from '@oceanprotocol/lib'
+import { ProviderFees } from '@neuradao/ocean-lib'
 
 /**
  * @interface OrderPriceAndFee

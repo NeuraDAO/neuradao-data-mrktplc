@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import { PurgatoryDataAccount, getAccountPurgatoryData } from '@utils/purgatory'
 
 interface UseAccountPurgatory {

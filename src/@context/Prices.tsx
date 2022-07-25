@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import { fetchData } from '@utils/fetch'
 import useSWR from 'swr'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import { useMarketMetadata } from './MarketMetadata'
 
 interface Prices {

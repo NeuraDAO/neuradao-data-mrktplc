@@ -14,7 +14,7 @@ import {
 } from '@utils/subgraph'
 import { useUserPreferences } from './UserPreferences'
 import { PoolShares_poolShares as PoolShare } from '../@types/subgraph/PoolShares'
-import { Asset, LoggerInstance } from '@oceanprotocol/lib'
+import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
 import { getDownloadAssets, getPublishedAssets } from '@utils/aquarius'
 import { accountTruncate } from '@utils/web3'
 import axios, { CancelToken } from 'axios'

@@ -4,7 +4,7 @@ import { InputProps } from '@shared/FormInput'
 import Logo from '@images/logo.svg'
 import RefreshName from './RefreshName'
 import styles from './index.module.css'
-import { generateDtName } from '@oceanprotocol/lib'
+import { generateDtName } from '@neuradao/ocean-lib'
 
 export default function Datatoken(props: InputProps): ReactElement {
   const [field, meta, helpers] = useField(props.name)

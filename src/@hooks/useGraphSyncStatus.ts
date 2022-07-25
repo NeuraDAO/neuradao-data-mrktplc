@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useWeb3 } from '@context/Web3'
-import { Config, LoggerInstance } from '@oceanprotocol/lib'
+import { Config, LoggerInstance } from '@neuradao/ocean-lib'
 import Web3 from 'web3'
 import axios, { AxiosResponse } from 'axios'
 import { getOceanConfig } from '@utils/ocean'

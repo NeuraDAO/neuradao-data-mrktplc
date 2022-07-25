@@ -3,7 +3,7 @@ import { usePrices } from '@context/Prices'
 import { useWeb3 } from '@context/Web3'
 import Web3 from 'web3'
 import useNftFactory from '@hooks/contracts/useNftFactory'
-import { NftFactory } from '@oceanprotocol/lib'
+import { NftFactory } from '@neuradao/ocean-lib'
 import Conversion from '@shared/Price/Conversion'
 import { generateNftCreateData, NftMetadata } from '@utils/nft'
 

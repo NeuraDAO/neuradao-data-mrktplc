@@ -10,7 +10,7 @@ import { useWeb3 } from '@context/Web3'
 import { isValidNumber } from '@utils/numbers'
 import Decimal from 'decimal.js'
 import { useAsset } from '@context/Asset'
-import { Pool } from '@oceanprotocol/lib'
+import { Pool } from '@neuradao/ocean-lib'
 import { usePool } from '@context/Pool'
 
 export default function FormAdd({

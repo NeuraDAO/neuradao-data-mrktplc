@@ -3,7 +3,7 @@ import {
   downloadFileBrowser,
   LoggerInstance,
   Provider
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { ListItem } from '@shared/atoms/Lists'
 import Button from '@shared/atoms/Button'
