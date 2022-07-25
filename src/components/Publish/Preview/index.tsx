@@ -5,7 +5,7 @@ import { useFormikContext } from 'formik'
 import AssetContent from 'src/components/Asset/AssetContent'
 import { transformPublishFormToDdo } from '../_utils'
 import { AssetExtended } from 'src/@types/AssetExtended'
-import { ZERO_ADDRESS } from '@oceanprotocol/lib'
+import { ZERO_ADDRESS } from '@neuradao/ocean-lib'
 
 export default function Preview(): ReactElement {
   const [asset, setAsset] = useState<AssetExtended>()

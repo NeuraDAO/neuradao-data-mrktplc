@@ -5,7 +5,7 @@ import UrlInput from '../URLInput'
 import { InputProps } from '@shared/FormInput'
 import { getFileUrlInfo } from '@utils/provider'
 import { FormPublishData } from 'src/components/Publish/_types'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import { useAsset } from '@context/Asset'
 
 export default function FilesInput(props: InputProps): ReactElement {

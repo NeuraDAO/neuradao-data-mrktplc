@@ -7,7 +7,7 @@ import React, {
   useCallback,
   ReactNode
 } from 'react'
-import { Config, LoggerInstance, Purgatory } from '@oceanprotocol/lib'
+import { Config, LoggerInstance, Purgatory } from '@neuradao/ocean-lib'
 import { CancelToken } from 'axios'
 import { checkV3Asset, retrieveAsset } from '@utils/aquarius'
 import { useWeb3 } from './Web3'
@@ -70,6 +70,7 @@ function AssetProvider({
       LoggerInstance.log('[asset] Fetching asset...')
       setLoading(true)
       const asset = await retrieveAsset(did, token)
+      console.log({ asset, did, token })
 
       if (!asset) {
         setIsV3Asset(await checkV3Asset(did, token))

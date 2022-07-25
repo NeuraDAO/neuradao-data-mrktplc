@@ -7,7 +7,7 @@ import ButtonBuy from '@shared/ButtonBuy'
 import { secondsToString } from '@utils/ddo'
 import AlgorithmDatasetsListForCompute from './Compute/AlgorithmDatasetsListForCompute'
 import styles from './Download.module.css'
-import { FileInfo, LoggerInstance, ZERO_ADDRESS } from '@oceanprotocol/lib'
+import { FileInfo, LoggerInstance, ZERO_ADDRESS } from '@neuradao/ocean-lib'
 import { order } from '@utils/order'
 import { AssetExtended } from 'src/@types/AssetExtended'
 import { buyDtFromPool } from '@utils/pool'
@@ -70,6 +70,7 @@ export default function Download({
       !orderPriceAndFees && setIsLoading(true)
       setStatusText('Refreshing price')
       // this is needed just for pool
+      console.log({ AD: asset?.accessDetails })
       const paramsForPool: CalcInGivenOutParams = {
         tokenInLiquidity: poolData?.baseTokenLiquidity,
         tokenOutLiquidity: poolData?.datatokenLiquidity,

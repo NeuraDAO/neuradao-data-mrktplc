@@ -9,7 +9,7 @@ import {
   queryMetadata
 } from '@utils/aquarius'
 import { useAsset } from '@context/Asset'
-import { PublisherTrustedAlgorithm } from '@oceanprotocol/lib'
+import { PublisherTrustedAlgorithm } from '@neuradao/ocean-lib'
 import FormActions from './FormActions'
 import { useCancelToken } from '@hooks/useCancelToken'
 import { SortTermOptions } from '../../../@types/aquarius/SearchQuery'

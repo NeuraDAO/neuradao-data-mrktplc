@@ -4,7 +4,7 @@ import { useAsset } from '@context/Asset'
 import { useWeb3 } from '@context/Web3'
 import { isValidNumber } from '@utils/numbers'
 import Decimal from 'decimal.js'
-import { Datatoken, LoggerInstance, Pool } from '@oceanprotocol/lib'
+import { Datatoken, LoggerInstance, Pool } from '@neuradao/ocean-lib'
 import { usePool } from '@context/Pool'
 
 Decimal.set({ toExpNeg: -18, precision: 18, rounding: 1 })

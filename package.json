@@ -18,7 +18,7 @@
     "type-check": "tsc --noEmit",
     "deploy:s3": "bash scripts/deploy-s3.sh",
     "postinstall": "husky install",
-    "codegen:apollo": "apollo client:codegen --endpoint=https://v4.subgraph.ropsten.oceanprotocol.com/subgraphs/name/oceanprotocol/ocean-subgraph --target typescript --tsFileExtension=d.ts --outputFlat src/@types/subgraph/",
+    "codegen:apollo": "apollo client:codegen --endpoint=http://test.neuradao.co:9000/subgraphs/name/oceanprotocol/ocean-subgraph --target typescript --tsFileExtension=d.ts --outputFlat src/@types/subgraph/",
     "storybook": "cross-env NODE_ENV=test start-storybook -p 6006 --quiet",
     "storybook:build": "cross-env NODE_ENV=test build-storybook"
   },
@@ -26,8 +26,8 @@
     "@coinbase/wallet-sdk": "^3.4.0",
     "@coingecko/cryptoformat": "^0.5.4",
     "@loadable/component": "^5.15.2",
+    "@neuradao/ocean-lib": "^1.2.2",
     "@oceanprotocol/art": "^3.2.0",
-    "@oceanprotocol/lib": "^1.1.6",
     "@oceanprotocol/typographies": "^0.1.0",
     "@tippyjs/react": "^4.2.6",
     "@toruslabs/torus-embed": "^1.27.2",

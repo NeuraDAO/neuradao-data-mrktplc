@@ -4,7 +4,7 @@ import classNames from 'classnames/bind'
 import cleanupContentType from '@utils/cleanupContentType'
 import styles from './index.module.css'
 import Loader from '@shared/atoms/Loader'
-import { FileInfo } from '@oceanprotocol/lib'
+import { FileInfo } from '@neuradao/ocean-lib'
 
 const cx = classNames.bind(styles)
 

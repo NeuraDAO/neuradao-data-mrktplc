@@ -1,4 +1,4 @@
-import { approve, Pool, PoolPriceAndFees } from '@oceanprotocol/lib'
+import { approve, Pool, PoolPriceAndFees } from '@neuradao/ocean-lib'
 import Web3 from 'web3'
 import { getDummyWeb3 } from './web3'
 import { TransactionReceipt } from 'web3-eth'

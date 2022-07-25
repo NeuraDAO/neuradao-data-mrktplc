@@ -1,6 +1,6 @@
 import { useAsset } from '@context/Asset'
 import { useWeb3 } from '@context/Web3'
-import { Asset } from '@oceanprotocol/lib'
+import { Asset } from '@neuradao/ocean-lib'
 import AddToken from '@shared/AddToken'
 import ExplorerLink from '@shared/ExplorerLink'
 import Publisher from '@shared/Publisher'

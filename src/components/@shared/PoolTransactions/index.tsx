@@ -12,7 +12,7 @@ import { getAsset } from '../../Profile/History/PoolShares/_utils'
 import { CancelToken } from 'axios'
 import Title from './Title'
 import styles from './index.module.css'
-import { Asset, LoggerInstance } from '@oceanprotocol/lib'
+import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
 import { useCancelToken } from '@hooks/useCancelToken'
 import { useMarketMetadata } from '@context/MarketMetadata'
 

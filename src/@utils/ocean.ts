@@ -1,4 +1,4 @@
-import { ConfigHelper, LoggerInstance, Config } from '@oceanprotocol/lib'
+import { LoggerInstance, Config, ConfigHelper } from '@neuradao/ocean-lib'
 // import contractAddresses from '@oceanprotocol/contracts/artifacts/address.json'
 import { AbiItem } from 'web3-utils/types'
 import Web3 from 'web3'
@@ -27,7 +27,8 @@ export function getDevelopmentConfig(): Config {
     // metadataContractAddress: contractAddresses.development?.Metadata,
     // oceanTokenAddress: contractAddresses.development?.Ocean,
     // There is no subgraph in barge so we hardcode the Rinkeby one for now
-    subgraphUri: 'https://v4.subgraph.rinkeby.oceanprotocol.com'
+    subgraphUri:
+      'http://test.neuradao.co:9000/subgraphs/name/oceanprotocol/ocean-subgraph'
   } as Config
 }
 

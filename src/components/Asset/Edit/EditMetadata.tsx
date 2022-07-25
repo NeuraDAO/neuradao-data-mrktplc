@@ -6,7 +6,7 @@ import {
   FixedRateExchange,
   Asset,
   Service
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import { validationSchema, getInitialValues } from './_constants'
 import { MetadataEditForm } from './_types'
 import { useWeb3 } from '@context/Web3'

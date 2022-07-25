@@ -1,4 +1,4 @@
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import axios from 'axios'
 import isUrl from 'is-url-superb'
 import { toast } from 'react-toastify'

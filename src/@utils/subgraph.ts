@@ -1,5 +1,5 @@
 import { gql, OperationResult, TypedDocumentNode, OperationContext } from 'urql'
-import { Asset, LoggerInstance } from '@oceanprotocol/lib'
+import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
 import { getUrqlClientInstance } from '@context/UrqlProvider'
 import { getOceanConfig } from './ocean'
 import { AssetPoolPrice } from '../@types/subgraph/AssetPoolPrice'
@@ -194,6 +194,7 @@ const OpcFeesQuery = gql`
 
 export function getSubgraphUri(chainId: number): string {
   const config = getOceanConfig(chainId)
+  console.log({ config })
   return config.subgraphUri
 }
 
@@ -205,6 +206,7 @@ export function getQueryContext(chainId: number): OperationContext {
       )}/subgraphs/name/oceanprotocol/ocean-subgraph`,
       requestPolicy: 'network-only'
     }
+    console.log({ subgraph: getSubgraphUri(Number(chainId)), chainId })
     return queryContext
   } catch (error) {
     LoggerInstance.error('Get query context error: ', error.message)

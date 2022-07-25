@@ -1,5 +1,5 @@
 import { getNetworkDisplayName } from '@hooks/useNetworkMetadata'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import Web3 from 'web3'
 import { getOceanConfig } from './ocean'
 

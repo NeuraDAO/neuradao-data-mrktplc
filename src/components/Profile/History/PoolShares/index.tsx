@@ -9,7 +9,7 @@ import { useProfile } from '@context/Profile'
 import { useCancelToken } from '@hooks/useCancelToken'
 import { useIsMounted } from '@hooks/useIsMounted'
 import { useUserPreferences } from '@context/UserPreferences'
-import { Asset, LoggerInstance } from '@oceanprotocol/lib'
+import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
 import { Liquidity } from './Liquidity'
 import { getAssetsFromPoolShares } from './_utils'
 

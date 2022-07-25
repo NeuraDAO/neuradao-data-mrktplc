@@ -3,7 +3,7 @@ import { useAsset } from '@context/Asset'
 import { useWeb3 } from '@context/Web3'
 import Decimal from 'decimal.js'
 import { ButtonApprove } from './ButtonApprove'
-import { allowance, approve, LoggerInstance } from '@oceanprotocol/lib'
+import { allowance, approve, LoggerInstance } from '@neuradao/ocean-lib'
 
 export default function TokenApproval({
   actionButton,

@@ -1,4 +1,4 @@
-import { Asset, Metadata, Service } from '@oceanprotocol/lib'
+import { Asset, Metadata, Service } from '@neuradao/ocean-lib'
 import React, { ReactElement } from 'react'
 import DebugOutput from '@shared/DebugOutput'
 import { MetadataEditForm } from './_types'

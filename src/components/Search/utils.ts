@@ -1,4 +1,4 @@
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import {
   generateBaseQuery,
   getFilterTerm,

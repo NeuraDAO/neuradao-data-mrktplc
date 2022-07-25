@@ -3,7 +3,7 @@ import { calcSingleOutGivenPoolIn, getLiquidityByShares } from '@utils/pool'
 import { CancelToken } from 'axios'
 import { PoolShares_poolShares as PoolShare } from '../../../../@types/subgraph/PoolShares'
 import { AssetPoolShare } from '.'
-import { Asset } from '@oceanprotocol/lib'
+import { Asset } from '@neuradao/ocean-lib'
 
 export function getAsset(items: Asset[], datatoken: string): Asset {
   for (let i = 0; i < items.length; i++) {

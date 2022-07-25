@@ -5,7 +5,7 @@ import {
   LoggerInstance,
   Pool,
   TokenInOutMarket
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import Actions from '../Pool/Actions'

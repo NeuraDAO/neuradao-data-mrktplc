@@ -8,7 +8,7 @@ import { useUserPreferences } from '@context/UserPreferences'
 import { useIsMounted } from '@hooks/useIsMounted'
 // not sure why this import is required
 import { AssetExtended } from 'src/@types/AssetExtended'
-import { Asset } from '@oceanprotocol/lib'
+import { Asset } from '@neuradao/ocean-lib'
 import { getAccessDetailsForAssets } from '@utils/accessDetailsAndPricing'
 import { useWeb3 } from '@context/Web3'
 
