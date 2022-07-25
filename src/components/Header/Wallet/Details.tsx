@@ -77,8 +77,8 @@ export default function Details(): ReactElement {
               style="text"
               size="small"
               onClick={async () => {
-                await web3Modal?.clearCachedProvider()
-                connect()
+                await logout()
+                await connect()
               }}
             >
               Switch Wallet

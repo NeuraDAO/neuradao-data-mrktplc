@@ -18,12 +18,7 @@ const Account = React.forwardRef((props, ref: any) => {
     await connect()
   }
 
-  return !accountId && web3Modal?.cachedProvider ? (
-    // Improve user experience for cached provider when connecting takes some time
-    <button className={styles.button} onClick={(e) => e.preventDefault()}>
-      <Loader />
-    </button>
-  ) : accountId ? (
+  return accountId ? (
     <button
       className={styles.button}
       aria-label="Account"

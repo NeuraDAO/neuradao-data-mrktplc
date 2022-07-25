@@ -25,6 +25,7 @@ import { useAsset } from '@context/Asset'
 import { setNftMetadata } from '@utils/nft'
 import { sanitizeUrl } from '@utils/url'
 import { getEncryptedFiles } from '@utils/provider'
+import { getAlgorithmContainerPreset } from './_utils'
 
 export default function Edit({
   asset
@@ -38,7 +39,17 @@ export default function Edit({
   const [success, setSuccess] = useState<string>()
   const [error, setError] = useState<string>()
   const isComputeType = asset?.services[0]?.type === 'compute'
+  const isAlgorithm = asset?.metadata.type === 'algorithm'
   const hasFeedback = error || success
+
+  console.log(
+    '[initial values]',
+    getInitialValues(
+      asset?.metadata,
+      asset?.services[0]?.timeout,
+      asset?.accessDetails?.price
+    )
+  )
 
   async function updateFixedPrice(newPrice: string) {
     const config = getOceanConfig(asset.chainId)
@@ -51,7 +62,7 @@ export default function Edit({
     const setPriceResp = await fixedRateInstance.setRate(
       accountId,
       asset.accessDetails.addressOrId,
-      newPrice
+      newPrice.toString()
     )
     LoggerInstance.log('[edit] setFixedRate result', setPriceResp)
     if (!setPriceResp) {
@@ -68,13 +79,49 @@ export default function Edit({
       let updatedFiles = asset.services[0].files
       const linksTransformed = values.links?.length &&
         values.links[0].valid && [sanitizeUrl(values.links[0].url)]
-      const updatedMetadata: Metadata = {
-        ...asset.metadata,
-        name: values.name,
-        description: values.description,
-        links: linksTransformed,
-        author: values.author
+      // TODO: make a conditional to check if asset is an algorithm
+      let updatedMetadata: Metadata
+      if (isAlgorithm) {
+        updatedMetadata = {
+          ...asset.metadata,
+          name: values.name,
+          description: values.description,
+          links: linksTransformed,
+          author: values.author,
+          algorithm: values.dockerImage
+            ? {
+                language: '',
+                version: '0.1',
+                container: {
+                  entrypoint: getAlgorithmContainerPreset(values.dockerImage)
+                    .entrypoint,
+                  image: getAlgorithmContainerPreset(values.dockerImage).image,
+                  tag: getAlgorithmContainerPreset(values.dockerImage).tag,
+                  checksum: getAlgorithmContainerPreset(values.dockerImage)
+                    .checksum
+                }
+              }
+            : asset?.metadata.algorithm
+        }
+      } else {
+        updatedMetadata = {
+          ...asset.metadata,
+          name: values.name,
+          description: values.description,
+          links: linksTransformed,
+          author: values.author
+          // algorithm: values.algorithm,
+        }
       }
+
+      // const updatedMetadata: Metadata = {
+      //   ...asset.metadata,
+      //   name: values.name,
+      //   description: values.description,
+      //   links: linksTransformed,
+      //   author: values.author
+      //   // algorithm: values.algorithm,
+      // }
 
       asset?.accessDetails?.type === 'fixed' &&
         values.price !== asset.accessDetails.price &&
@@ -177,6 +224,7 @@ export default function Edit({
               data={content.form.data}
               showPrice={asset?.accessDetails?.type === 'fixed'}
               isComputeDataset={isComputeType}
+              isAlgorithm={isAlgorithm}
             />
 
             <Web3Feedback

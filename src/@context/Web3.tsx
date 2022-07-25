@@ -22,6 +22,8 @@ import useNetworkMetadata, {
   NetworkType
 } from '../@hooks/useNetworkMetadata'
 import { useMarketMetadata } from './MarketMetadata'
+import Torus from '@toruslabs/torus-embed'
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
 
 interface Web3ProviderValue {
   web3: Web3
@@ -64,17 +66,25 @@ const providerOptions = isBrowser
             80001: 'https://rpc-mumbai.matic.today'
           }
         }
+      },
+      torus: {
+        package: Torus,
+        display: {
+          description: 'Recommended for web2 savvy users'
+        }, // required
+        options: {
+          network: 'rinkeby'
+        }
+      },
+      coinbasewallet: {
+        package: CoinbaseWalletSDK, // Required
+        options: {
+          appName: 'neuramarket', // Required
+          infuraId, // Required
+          chainId: 4, // Optional. It defaults to 1 if not provided
+          darkMode: true // Optional. Use dark theme, defaults to false
+        }
       }
-      // torus: {
-      //   package: require('@toruslabs/torus-embed')
-      //   // options: {
-      //   //   networkParams: {
-      //   //     host: oceanConfig.url, // optional
-      //   //     chainId: 1337, // optional
-      //   //     networkId: 1337 // optional
-      //   //   }
-      //   // }
-      // }
     }
   : {}
 

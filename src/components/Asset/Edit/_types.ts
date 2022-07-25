@@ -6,6 +6,7 @@ export interface MetadataEditForm {
   links?: string | any[]
   files: string | any[]
   author?: string
+  dockerImage?: any
 }
 
 export interface ComputeEditForm {
