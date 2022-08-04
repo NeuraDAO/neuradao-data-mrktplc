@@ -33,7 +33,7 @@ export default function FormEditMetadata({
   // so handleTimeoutCustomOption is called only once.
   // https://github.com/oceanprotocol/market/pull/324#discussion_r561132310
   // if (data && values) handleTimeoutCustomOption(data, values)
-  const { values, setFieldValue } = useFormikContext<FormPublishData>()
+  const { values, setFieldValue } = useFormikContext<any>()
 
   const timeoutOptionsArray = data.filter(
     (field) => field.name === 'timeout'
@@ -46,12 +46,11 @@ export default function FormEditMetadata({
     timeoutOptionsArray.push('Forever')
   }
 
-  const dockerImageOptions: BoxSelectionOption[] =
-    algorithmContainerPresets.map((preset) => ({
-      name: `${preset.image}:${preset.tag}`,
-      title: `${preset.image}:${preset.tag}`,
-      checked: values.dockerImage === `${preset.image}:${preset.tag}`
-    }))
+  const dockerImageOptions: any[] = algorithmContainerPresets.map((preset) => ({
+    name: `${preset.image}:${preset.tag}`,
+    title: `${preset.image}:${preset.tag}`,
+    checked: values.dockerImage === `${preset.image}:${preset.tag}`
+  }))
 
   // TODO: need to add algorithm prop in editMetadata.json => data object
   const fields = data.map((field: InputProps) => {

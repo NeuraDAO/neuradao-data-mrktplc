@@ -1,4 +1,7 @@
-import { algorithmContainerPresets } from './_constants'
+import {
+  MetadataAlgorithmContainer,
+  algorithmContainerPresets
+} from './_constants'
 
 export function getAlgorithmContainerPreset(
   dockerImage: string
