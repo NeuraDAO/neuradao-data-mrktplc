@@ -30,7 +30,7 @@ export default function App({
 
   return (
     <div className={styles.app}>
-      {siteContent?.announcement !== '' && (
+      {/* {siteContent?.announcement !== '' && (
         <AnnouncementBanner
           text={siteContent?.announcement}
           action={{
@@ -39,7 +39,7 @@ export default function App({
             handleAction: openInNewTab
           }}
         />
-      )}
+      )} */}
       <Header />
 
       {isInPurgatory && (

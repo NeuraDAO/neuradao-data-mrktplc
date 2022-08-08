@@ -287,7 +287,7 @@ function ProfileProvider({
     async function getUserSalesNumber() {
       try {
         const result = await getUserSales(accountId, chainIds)
-        setSales(result)
+        setSales(Math.abs(result))
         LoggerInstance.log(`[profile] Fetched sales number: ${result}.`, result)
       } catch (error) {
         LoggerInstance.error(error.message)

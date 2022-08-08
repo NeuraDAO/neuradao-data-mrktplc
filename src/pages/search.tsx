@@ -24,7 +24,7 @@ export default function PageSearch(): ReactElement {
         totalResults !== undefined
           ? searchValue && searchValue !== ' '
             ? totalResults === 0
-              ? 'No results'
+              ? ''
               : totalResults +
                 (totalResults > 1 ? ' results' : ' result') +
                 ' for ' +
