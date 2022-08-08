@@ -124,7 +124,7 @@ export default function HomePage(): ReactElement {
         <Bookmarks />
       </section>
 
-      <SectionQueryResult title="Most Sales" query={queryMostSales} />
+      {/* <SectionQueryResult title="Most Sales" query={queryMostSales} /> */}
 
       <SectionQueryResult
         title="Recently Published"
