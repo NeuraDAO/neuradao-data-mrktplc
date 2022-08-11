@@ -37,6 +37,7 @@ function SectionQueryResult({
   const [loading, setLoading] = useState<boolean>()
   const isMounted = useIsMounted()
   const newCancelToken = useCancelToken()
+  console.log(result)
 
   useEffect(() => {
     if (!query) return
@@ -56,6 +57,11 @@ function SectionQueryResult({
         try {
           setLoading(true)
           const result = await queryMetadata(query, newCancelToken())
+          result.results = result.results.filter((asset) => {
+            return (
+              asset.nft?.owner === '0x7E0ad0B2CD0560Caf9a4Fc25904d2AB7238d140b'
+            )
+          })
           if (!isMounted()) return
           if (queryData && result?.totalResults > 0) {
             const sortedAssets = sortElements(result.results, queryData)
@@ -96,9 +102,6 @@ export default function HomePage(): ReactElement {
   useEffect(() => {
     const baseParams = {
       chainIds,
-      esPaginationOptions: {
-        size: 9
-      },
       sortOptions: {
         sortBy: SortTermOptions.Created
       } as SortOptions
