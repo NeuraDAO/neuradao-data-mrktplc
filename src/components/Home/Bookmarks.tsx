@@ -1,6 +1,6 @@
 import { useUserPreferences } from '@context/UserPreferences'
 import React, { ReactElement, useEffect, useState } from 'react'
-import Table from '@shared/atoms/Table'
+import Table, { TableOceanColumn } from '@shared/atoms/Table'
 import { LoggerInstance } from '@neuradao/ocean-lib'
 import Price from '@shared/Price'
 import Tooltip from '@shared/atoms/Tooltip'
