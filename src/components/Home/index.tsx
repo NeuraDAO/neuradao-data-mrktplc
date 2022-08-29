@@ -2,34 +2,14 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import AssetList from '@shared/AssetList'
 import Button from '@shared/atoms/Button'
 import Bookmarks from './Bookmarks'
-import {
-  generateBaseQuery,
-  getFilterTerm,
-  queryMetadata
-} from '@utils/aquarius'
-import { getHighestLiquidityDatatokens } from '@utils/subgraph'
-import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
+import { generateBaseQuery, queryMetadata } from '@utils/aquarius'
+import { Asset, LoggerInstance } from '@oceanprotocol/lib'
 import { useUserPreferences } from '@context/UserPreferences'
 import styles from './index.module.css'
 import { useIsMounted } from '@hooks/useIsMounted'
 import { useCancelToken } from '@hooks/useCancelToken'
 import { SortTermOptions } from '../../@types/aquarius/SearchQuery'
 import PublishersWithMostSales from './PublishersWithMostSales'
-
-async function getQueryHighest(
-  chainIds: number[]
-): Promise<[SearchQuery, string[]]> {
-  const dtList = await getHighestLiquidityDatatokens(chainIds)
-  const baseQueryParams = {
-    chainIds,
-    esPaginationOptions: {
-      size: dtList.length > 0 ? dtList.length : 1
-    },
-    filters: [getFilterTerm('services.datatokenAddress', dtList)]
-  } as BaseQueryParams
-  const queryHighest = generateBaseQuery(baseQueryParams)
-  return [queryHighest, dtList]
-}
 
 function sortElements(items: Asset[], sorted: string[]) {
   items.sort(function (a, b) {
@@ -57,6 +37,7 @@ function SectionQueryResult({
   const [loading, setLoading] = useState<boolean>()
   const isMounted = useIsMounted()
   const newCancelToken = useCancelToken()
+  console.log(result)
 
   useEffect(() => {
     if (!query) return
@@ -76,6 +57,11 @@ function SectionQueryResult({
         try {
           setLoading(true)
           const result = await queryMetadata(query, newCancelToken())
+          result.results = result.results.filter((asset) => {
+            return (
+              asset.nft?.owner === '0x7E0ad0B2CD0560Caf9a4Fc25904d2AB7238d140b'
+            )
+          })
           if (!isMounted()) return
           if (queryData && result?.totalResults > 0) {
             const sortedAssets = sortElements(result.results, queryData)
@@ -109,25 +95,32 @@ function SectionQueryResult({
 }
 
 export default function HomePage(): ReactElement {
-  const [queryAndDids, setQueryAndDids] = useState<[SearchQuery, string[]]>()
   const [queryLatest, setQueryLatest] = useState<SearchQuery>()
+  const [queryMostSales, setQueryMostSales] = useState<SearchQuery>()
   const { chainIds } = useUserPreferences()
 
   useEffect(() => {
-    getQueryHighest(chainIds).then((results) => {
-      setQueryAndDids(results)
-    })
-
     const baseParams = {
       chainIds,
       esPaginationOptions: {
-        size: 9
+        size: 10000
       },
       sortOptions: {
         sortBy: SortTermOptions.Created
       } as SortOptions
     } as BaseQueryParams
     setQueryLatest(generateBaseQuery(baseParams))
+
+    const baseParamsSales = {
+      chainIds,
+      esPaginationOptions: {
+        size: 9
+      },
+      sortOptions: {
+        sortBy: SortTermOptions.Stats
+      } as SortOptions
+    } as BaseQueryParams
+    setQueryMostSales(generateBaseQuery(baseParamsSales))
   }, [chainIds])
 
   return (
@@ -143,10 +136,7 @@ export default function HomePage(): ReactElement {
         title="Recently Published"
         query={queryLatest}
         action={
-          <Button
-            style="text"
-            to="/search?sort=metadata.created&sortOrder=desc"
-          >
+          <Button style="text" to="/search?sort=nft.created&sortOrder=desc">
             All data sets and algorithms →
           </Button>
         }
