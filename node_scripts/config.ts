@@ -3,7 +3,7 @@
 // const HDWalletProvider = require('@truffle/hdwallet-provider')
 // const fs = require('fs')
 // const { homedir } = require('os')
-// const { ConfigHelper } = require('@oceanprotocol/lib')
+// const { ConfigHelper } = require('@neuradao/ocean-lib')
 
 import 'dotenv/config'
 import HDWalletProvider from '@truffle/hdwallet-provider'

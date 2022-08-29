@@ -1,5 +1,5 @@
 import { gql, OperationResult, TypedDocumentNode, OperationContext } from 'urql'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import { getUrqlClientInstance } from '@context/UrqlProvider'
 import { getOceanConfig } from './ocean'
 import { AssetPreviousOrder } from '../@types/subgraph/AssetPreviousOrder'
