@@ -104,7 +104,6 @@
     "@types/yup": "^0.29.14",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
-    "apollo": "^2.34.0",
     "assert": "^2.0.0",
     "buffer": "^6.0.3",
     "cross-env": "^7.0.3",
@@ -131,7 +130,10 @@
     "stream-http": "^3.2.0",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.7.3",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "apollo": "2.33.4",
+    "apollo-codegen-core": "0.40.3",
+    "apollo-language-server": "1.26.3"
   },
   "repository": {
     "type": "git",
