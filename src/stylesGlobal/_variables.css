@@ -4,6 +4,7 @@
   --brand-pink: #ff4092;
   --brand-purple: #7b1173;
   --brand-violet: #e000cf;
+  --brand-blue: #695ee6;
 
   --brand-grey-darker: #201f1f;
   --brand-grey-dark: #303030;
@@ -28,8 +29,8 @@
   --background-body: #24262e;
   --background-body-transparent: rgba(255, 255, 255, 0.8);
   --background-content: #2f3340;
-  --background-highlight: #f7f7f7; /* #f7f7f7; */
-  --ui-background-highlight: #434c68; /* #f7f7f7; */
+  --background-highlight: #3a3f4f; /* #f7f7f7; */
+  --ui-background-highlight: rgb(63, 69, 87); /* #f7f7f7; */
   --border-color: #272b36;
   --box-shadow-color: rgba(0, 0, 0, 0.05);
 
