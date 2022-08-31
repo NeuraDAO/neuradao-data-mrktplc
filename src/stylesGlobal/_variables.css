@@ -23,13 +23,14 @@
   --color-secondary: #8b98a9;
 
   /* Only use these vars for most color referencing for easy light/dark mode */
-  --font-color-text: #41474e;
-  --font-color-heading: #141414;
-  --background-body: #fcfcfc;
+  --font-color-text: #8b98a9; /* #41474e; */
+  --font-color-heading: linear-gradient(to right, #695ee6, #ff7a7a);
+  --background-body: #24262e;
   --background-body-transparent: rgba(255, 255, 255, 0.8);
-  --background-content: #fff;
-  --background-highlight: #f7f7f7;
-  --border-color: #e2e2e2;
+  --background-content: #2f3340;
+  --background-highlight: #f7f7f7; /* #f7f7f7; */
+  --ui-background-highlight: #434c68; /* #f7f7f7; */
+  --border-color: #272b36;
   --box-shadow-color: rgba(0, 0, 0, 0.05);
 
   --font-family-base: 'Sharp Sans', -apple-system, BlinkMacSystemFont,

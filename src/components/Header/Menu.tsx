@@ -45,7 +45,7 @@ export default function Menu(): ReactElement {
         </a>
       </Link>
 
-      <Tooltip
+      {/* <Tooltip
         className={styles.badgeWrap}
         content={
           <div className={styles.versions}>
@@ -68,7 +68,7 @@ export default function Menu(): ReactElement {
             </>
           }
         />
-      </Tooltip>
+      </Tooltip> */}
 
       <ul className={styles.navigation}>
         {siteContent?.menu.map((item: MenuItem) => (
