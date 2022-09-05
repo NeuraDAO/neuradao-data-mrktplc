@@ -29,7 +29,7 @@ export default function AssetType({
         {type === 'dataset' ? 'data set' : 'algorithm'}
       </div>
 
-      {totalSales ? (
+      {totalSales && !(totalSales === -1) ? (
         <div className={styles.typeLabel}>
           {`${totalSales} ${totalSales === 1 ? 'sale' : 'sales'}`}
         </div>
