@@ -8,7 +8,10 @@ import { useUserPreferences } from '@context/UserPreferences'
 import styles from './index.module.css'
 import { useIsMounted } from '@hooks/useIsMounted'
 import { useCancelToken } from '@hooks/useCancelToken'
-import { SortTermOptions } from '../../@types/aquarius/SearchQuery'
+import {
+  SortDirectionOptions,
+  SortTermOptions
+} from '../../@types/aquarius/SearchQuery'
 import PublishersWithMostSales from './PublishersWithMostSales'
 
 function sortElements(items: Asset[], sorted: string[]) {
@@ -57,11 +60,11 @@ function SectionQueryResult({
         try {
           setLoading(true)
           const result = await queryMetadata(query, newCancelToken())
-          result.results = result.results.filter((asset) => {
-            return (
-              asset.nft?.owner === '0x7E0ad0B2CD0560Caf9a4Fc25904d2AB7238d140b'
-            )
-          })
+          // result.results = result.results.filter((asset) => {
+          //   return (
+          //     asset.nft?.owner === '0x7E0ad0B2CD0560Caf9a4Fc25904d2AB7238d140b'
+          //   )
+          // })
           if (!isMounted()) return
           if (queryData && result?.totalResults > 0) {
             const sortedAssets = sortElements(result.results, queryData)
@@ -94,6 +97,55 @@ function SectionQueryResult({
   )
 }
 
+function getFilterTerm(
+  filterField: string,
+  value: string | number | boolean | number[] | string[]
+): FilterTerm {
+  const isArray = Array.isArray(value)
+  return {
+    [isArray ? 'terms' : 'term']: {
+      [filterField]: value
+    }
+  }
+}
+
+function getPublishedAssets(
+  accountId: string,
+  chainIds: number[],
+  type?: string,
+  accesType?: string
+): BaseQueryParams {
+  if (!accountId) return
+
+  const filters: FilterTerm[] = []
+
+  filters.push(getFilterTerm('nft.owner', accountId.toLowerCase()))
+  accesType !== undefined &&
+    filters.push(getFilterTerm('services.type', accesType))
+  type !== undefined && filters.push(getFilterTerm('metadata.type', type))
+
+  const baseQueryParams = {
+    chainIds,
+    filters,
+    sortOptions: {
+      sortBy: SortTermOptions.Created
+    } as SortOptions,
+    aggs: {
+      totalOrders: {
+        sum: {
+          field: SortTermOptions.Stats
+        }
+      }
+    },
+    ignorePurgatory: true,
+    esPaginationOptions: {
+      size: 9
+    }
+  } as BaseQueryParams
+
+  return baseQueryParams
+}
+
 export default function HomePage(): ReactElement {
   const [queryLatest, setQueryLatest] = useState<SearchQuery>()
   const [queryMostSales, setQueryMostSales] = useState<SearchQuery>()
@@ -103,13 +155,20 @@ export default function HomePage(): ReactElement {
     const baseParams = {
       chainIds,
       esPaginationOptions: {
-        size: 10000
+        size: 9
       },
       sortOptions: {
         sortBy: SortTermOptions.Created
       } as SortOptions
     } as BaseQueryParams
-    setQueryLatest(generateBaseQuery(baseParams))
+    setQueryLatest(
+      generateBaseQuery(
+        getPublishedAssets(
+          '0x7E0ad0B2CD0560Caf9a4Fc25904d2AB7238d140b',
+          chainIds
+        )
+      )
+    )
 
     const baseParamsSales = {
       chainIds,
@@ -132,15 +191,7 @@ export default function HomePage(): ReactElement {
 
       {/* <SectionQueryResult title="Most Sales" query={queryMostSales} /> */}
 
-      <SectionQueryResult
-        title="Recently Published"
-        query={queryLatest}
-        action={
-          <Button style="text" to="/search?sort=nft.created&sortOrder=desc">
-            All data sets and algorithms →
-          </Button>
-        }
-      />
+      <SectionQueryResult title="Recently Published" query={queryLatest} />
 
       <PublishersWithMostSales title="Publishers With Most Sales" />
     </>

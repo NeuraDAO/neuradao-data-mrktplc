@@ -19,7 +19,7 @@ module.exports = {
 
   // List of chainIds which metadata cache queries will return by default.
   // This preselects the Chains user preferences.
-  chainIds: [1, 137, 56, 246, 1285],
+  chainIds: [4],
 
   // List of all supported chainIds. Used to populate the Chains user preferences list.
   chainIdsSupported: [1, 137, 56, 246, 1285, 3, 4, 80001, 1287],
