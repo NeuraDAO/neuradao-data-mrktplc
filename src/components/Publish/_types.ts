@@ -35,6 +35,13 @@ export interface FormPublishData {
     author: string
     termsAndConditions: boolean
     tags?: string
+    modalities?: string
+    tasks?: string
+    size?: string
+    fileCount?: string
+    sessions?: string
+    participants?: string
+    participantsAge?: string
     dockerImage?: string
     dockerImageCustom?: string
     dockerImageCustomTag?: string

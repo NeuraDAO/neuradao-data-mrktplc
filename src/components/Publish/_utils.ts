@@ -66,6 +66,13 @@ export async function transformPublishFormToDdo(
     name,
     description,
     tags,
+    modalities,
+    tasks,
+    size,
+    fileCount,
+    sessions,
+    participants,
+    participantsAge,
     author,
     termsAndConditions,
     dockerImage,
@@ -93,12 +100,21 @@ export async function transformPublishFormToDdo(
     name,
     description,
     tags: transformTags(tags),
+    modalities: transformTags(modalities),
+    tasks: transformTags(tasks),
     author,
     license: 'https://market.oceanprotocol.com/terms',
     links: linksTransformed,
     additionalInformation: {
       termsAndConditions
     },
+    ...(type === 'dataset' && {
+      size,
+      fileCount,
+      sessions,
+      participants,
+      participantsAge
+    }),
     ...(type === 'algorithm' &&
       dockerImage !== '' && {
         algorithm: {

@@ -43,6 +43,52 @@
         "help": "Separate tags with comma."
       },
       {
+        "name": "modalities",
+        "label": "Modalities",
+        "placeholder": "e.g. EEG, fMRI",
+        "help": "Separate modalities with comma."
+      },
+      {
+        "name": "tasks",
+        "label": "Tasks",
+        "placeholder": "e.g. Oddball, N-back",
+        "help": "Separate tasks with comma."
+      },
+      {
+        "name": "size",
+        "label": "Dataset Size",
+        "placeholder": "in mb, eg. 100",
+        "type": "number",
+        "help": "Generated from uploaded dataset"
+      },
+      {
+        "name": "fileCount",
+        "label": "File Count",
+        "placeholder": "10",
+        "type": "number",
+        "help": "Generated from uploaded files"
+      },
+      {
+        "name": "sessions",
+        "label": "Sessions",
+        "type": "number",
+        "placeholder": "e.g. 1, 2, 3",
+        "help": "# of sessions in the dataset"
+      },
+      {
+        "name": "participants",
+        "label": "Participants",
+        "type": "number",
+        "placeholder": "e.g. 1, 2, 3",
+        "help": "# of participants in the dataset"
+      },
+      {
+        "name": "participantsAge",
+        "label": "Participants Age",
+        "placeholder": "e.g. 20-45",
+        "help": "age of participants in the dataset, seperate range using hyphen"
+      },
+      {
         "name": "dockerImage",
         "label": "Docker Image",
         "help": "Please select an image to run your algorithm.",
