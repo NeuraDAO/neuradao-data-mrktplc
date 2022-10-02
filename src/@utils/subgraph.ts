@@ -79,6 +79,14 @@ const OpcsApprovedTokensQuery = gql`
   }
 `
 
+const NftOrdersQuery = gql`
+  query NftOrdersQuery($id: String!) {
+    nft(id: $id) {
+      orderCount
+    }
+  }
+`
+
 export function getSubgraphUri(chainId: number): string {
   const config = getOceanConfig(chainId)
   return config.subgraphUri
@@ -110,6 +118,19 @@ export async function fetchData(
     return response
   } catch (error) {
     LoggerInstance.error('Error fetchData: ', error.message)
+  }
+  return null
+}
+
+export async function fetchNftOrders(id: string): Promise<any> {
+  try {
+    const query = NftOrdersQuery
+    const variables = { id }
+    const context: OperationContext = getQueryContext(4)
+    const response = await fetchData(query, variables, context)
+    return response
+  } catch (error) {
+    LoggerInstance.error('Error fetchNftOrders: ', error.message)
   }
   return null
 }
