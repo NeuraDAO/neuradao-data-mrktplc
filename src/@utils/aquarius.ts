@@ -8,7 +8,7 @@ import {
   SortTermOptions
 } from '../@types/aquarius/SearchQuery'
 import { transformAssetToAssetSelection } from './assetConvertor'
-import { fetchNftOrders } from './subgraph'
+import { fetchNftOrders, updateOrders } from './subgraph'
 
 export const MAXIMUM_NUMBER_OF_PAGES_WITH_RESULTS = 476
 
@@ -136,15 +136,8 @@ export async function retrieveAsset(
 
     let data = { ...response.data }
     // fetch the correct orders for that asset from the subgraph
-    let orders
-    try {
-      const ordersRes = await fetchNftOrders(data.nftAddress.toLowerCase())
-      orders = parseInt(ordersRes.data.nft.orderCount)
-    } catch {
-      LoggerInstance.log('retrieveAsset: failed to fetch orders from subgraph')
-    }
-    data = { ...data, stats: { ...data.stats, orders } }
-    console.log({ stats: data.stats.orders })
+    const updatedData = await updateOrders([data])
+    data = updatedData[0]
     return data
   } catch (error) {
     if (axios.isCancel(error)) {
