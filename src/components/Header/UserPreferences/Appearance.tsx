@@ -1,5 +1,5 @@
 import React, { ReactElement, ChangeEvent } from 'react'
-import { DarkMode } from 'use-dark-mode'
+// import { DarkMode } from 'use-dark-mode'
 import FormHelp from '@shared/FormInput/Help'
 import Label from '@shared/FormInput/Label'
 import Moon from '@images/moon.svg'
@@ -12,7 +12,7 @@ import styles from './Appearance.module.css'
 export default function Appearance({
   darkMode
 }: {
-  darkMode: DarkMode
+  darkMode: any
 }): ReactElement {
   const options: BoxSelectionOption[] = [
     {

@@ -1,5 +1,5 @@
 import { gql, OperationResult, TypedDocumentNode, OperationContext } from 'urql'
-import { LoggerInstance } from '@neuradao/ocean-lib'
+import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
 import { getUrqlClientInstance } from '@context/UrqlProvider'
 import { getOceanConfig } from './ocean'
 import { AssetPreviousOrder } from '../@types/subgraph/AssetPreviousOrder'
@@ -79,6 +79,14 @@ const OpcsApprovedTokensQuery = gql`
   }
 `
 
+const NftOrdersQuery = gql`
+  query NftOrdersQuery($id: String!) {
+    nft(id: $id) {
+      orderCount
+    }
+  }
+`
+
 export function getSubgraphUri(chainId: number): string {
   const config = getOceanConfig(chainId)
   return config.subgraphUri
@@ -112,6 +120,37 @@ export async function fetchData(
     LoggerInstance.error('Error fetchData: ', error.message)
   }
   return null
+}
+
+export async function fetchNftOrders(id: string): Promise<any> {
+  try {
+    const query = NftOrdersQuery
+    const variables = { id }
+    const context: OperationContext = getQueryContext(4)
+    const response = await fetchData(query, variables, context)
+    return response
+  } catch (error) {
+    LoggerInstance.error('Error fetchNftOrders: ', error.message)
+  }
+  return null
+}
+
+export async function updateOrders(assets: Asset[]) {
+  let updatedAssets = []
+  for (const data of assets) {
+    let orders
+    try {
+      const ordersRes = await fetchNftOrders(data.nftAddress.toLowerCase())
+      orders = parseInt(ordersRes.data.nft.orderCount)
+    } catch {
+      LoggerInstance.log('retrieveAsset: failed to fetch orders from subgraph')
+    }
+    updatedAssets.push({ ...data, stats: { ...data.stats, orders } })
+  }
+  // const updatedResults = await results.map(async (data: Asset) => {
+
+  // console.log({ updatedResults })
+  return updatedAssets
 }
 
 export async function fetchDataForMultipleChains(

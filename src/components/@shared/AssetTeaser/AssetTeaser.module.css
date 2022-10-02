@@ -16,6 +16,7 @@
 
 .algorithm .link {
   background-color: var(--background-body);
+  border-color: #545a6d;
 }
 
 .content {

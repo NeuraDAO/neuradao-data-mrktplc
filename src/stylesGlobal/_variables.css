@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans|Source+Code+Pro');
+
 :root {
   --brand-white: #ffffff;
   --brand-black: #141414;
   --brand-pink: #ff4092;
   --brand-purple: #7b1173;
   --brand-violet: #e000cf;
+  --brand-blue: #695ee6;
 
   --brand-grey-darker: #201f1f;
   --brand-grey-dark: #303030;
@@ -23,21 +26,22 @@
   --color-secondary: #8b98a9;
 
   /* Only use these vars for most color referencing for easy light/dark mode */
-  --font-color-text: #41474e;
-  --font-color-heading: #141414;
-  --background-body: #fcfcfc;
+  --font-color-text: #8b98a9; /* #41474e; */
+  --font-color-heading: linear-gradient(to right, #695ee6, #ff7a7a);
+  --background-body: #24262e;
   --background-body-transparent: rgba(255, 255, 255, 0.8);
-  --background-content: #fff;
-  --background-highlight: #f7f7f7;
-  --border-color: #e2e2e2;
+  --background-content: #2f3340;
+  --background-highlight: #3a3f4f; /* #f7f7f7; */
+  --ui-background-highlight: rgb(63, 69, 87); /* #f7f7f7; */
+  --border-color: #272b36;
   --box-shadow-color: rgba(0, 0, 0, 0.05);
 
-  --font-family-base: 'Sharp Sans', -apple-system, BlinkMacSystemFont,
+  --font-family-base: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Helvetica, Arial, sans-serif;
+  --font-family-heading: 'Work Sans Display', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Helvetica, Arial, sans-serif;
-  --font-family-heading: 'Sharp Sans Display', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Helvetica, Arial, sans-serif;
-  --font-family-monospace: 'Fira Code', 'Fira Mono', Menlo, Monaco, Consolas,
-    'Courier New', monospace;
+  --font-family-monospace: 'Source Code Pro', 'Fira Mono', Menlo, Monaco,
+    Consolas, 'Courier New', monospace;
 
   --font-size-root: 15px;
   --font-size-base: 1rem;

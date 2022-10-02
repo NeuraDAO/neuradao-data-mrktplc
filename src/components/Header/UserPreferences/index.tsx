@@ -5,7 +5,7 @@ import styles from './index.module.css'
 import Currency from './Currency'
 import Debug from './Debug'
 import Caret from '@images/caret.svg'
-import useDarkMode from 'use-dark-mode'
+// import useDarkMode from 'use-dark-mode'
 import Appearance from './Appearance'
 import TokenApproval from './TokenApproval'
 import { useMarketMetadata } from '@context/MarketMetadata'
@@ -13,7 +13,7 @@ import { useMarketMetadata } from '@context/MarketMetadata'
 export default function UserPreferences(): ReactElement {
   const { appConfig } = useMarketMetadata()
   // Calling this here because <Style /> is not mounted on first load
-  const darkMode = useDarkMode(false, appConfig?.darkModeConfig)
+  // const darkMode = useDarkMode(false, appConfig?.darkModeConfig)
 
   return (
     <Tooltip
@@ -21,7 +21,7 @@ export default function UserPreferences(): ReactElement {
         <ul className={styles.preferencesDetails}>
           <Currency />
           <TokenApproval />
-          <Appearance darkMode={darkMode} />
+          {/* <Appearance darkMode={darkMode} /> */}
           <Debug />
         </ul>
       }

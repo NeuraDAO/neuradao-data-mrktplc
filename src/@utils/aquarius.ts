@@ -8,6 +8,7 @@ import {
   SortTermOptions
 } from '../@types/aquarius/SearchQuery'
 import { transformAssetToAssetSelection } from './assetConvertor'
+import { fetchNftOrders, updateOrders } from './subgraph'
 
 export const MAXIMUM_NUMBER_OF_PAGES_WITH_RESULTS = 476
 
@@ -133,7 +134,10 @@ export async function retrieveAsset(
     console.log({ response })
     if (!response || response.status !== 200 || !response.data) return
 
-    const data = { ...response.data }
+    let data = { ...response.data }
+    // fetch the correct orders for that asset from the subgraph
+    const updatedData = await updateOrders([data])
+    data = updatedData[0]
     return data
   } catch (error) {
     if (axios.isCancel(error)) {
