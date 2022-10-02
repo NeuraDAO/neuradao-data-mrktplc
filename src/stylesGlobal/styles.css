@@ -58,6 +58,9 @@ h4,
 h5 {
   font-family: var(--font-family-heading);
   color: var(--font-color-heading);
+  background: linear-gradient(to right, #695ee6, #ff7a7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   line-height: 1.2;
   font-weight: var(--font-weight-bold);
   margin-top: 0;

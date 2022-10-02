@@ -1,7 +1,7 @@
 .selection {
   padding: 0;
   border: 1px solid var(--border-color);
-  background-color: var(--background-highlight);
+  background-color: var(--ui-background-highlight);
   border-radius: var(--border-radius);
   margin-bottom: calc(var(--spacer) / 2);
   font-size: var(--font-size-small);

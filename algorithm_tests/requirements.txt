@@ -1,6 +1,0 @@
--i https://pypi.org/simple
-numpy==1.23.1
-pandas==1.4.3
-mne==1.0.3
-nilearn==0.9.1
-matplotlib==3.5.2
