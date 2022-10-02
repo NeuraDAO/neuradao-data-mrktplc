@@ -10,6 +10,8 @@ import { useIsMounted } from '@hooks/useIsMounted'
 import { useCancelToken } from '@hooks/useCancelToken'
 import { SortTermOptions } from '../../@types/aquarius/SearchQuery'
 import PublishersWithMostSales from './PublishersWithMostSales'
+import { getOrderPriceAndFees } from '@utils/accessDetailsAndPricing'
+import { fetchNftOrders } from '@utils/subgraph'
 
 function sortElements(items: Asset[], sorted: string[]) {
   items.sort(function (a, b) {
@@ -19,6 +21,24 @@ function sortElements(items: Asset[], sorted: string[]) {
     )
   })
   return items
+}
+
+async function updateOrders(results: Asset[]) {
+  let updatedAssets = []
+  for (const data of results) {
+    let orders
+    try {
+      const ordersRes = await fetchNftOrders(data.nftAddress.toLowerCase())
+      orders = parseInt(ordersRes.data.nft.orderCount)
+    } catch {
+      LoggerInstance.log('retrieveAsset: failed to fetch orders from subgraph')
+    }
+    updatedAssets.push({ ...data, stats: { ...data.stats, orders } })
+  }
+  // const updatedResults = await results.map(async (data: Asset) => {
+
+  // console.log({ updatedResults })
+  return updatedAssets
 }
 
 function SectionQueryResult({
@@ -56,12 +76,9 @@ function SectionQueryResult({
       } else {
         try {
           setLoading(true)
-          const result = await queryMetadata(query, newCancelToken())
-          // result.results = result.results.filter((asset) => {
-          //   return (
-          //     asset.nft?.owner === '0x7E0ad0B2CD0560Caf9a4Fc25904d2AB7238d140b'
-          //   )
-          // })
+          let result = await queryMetadata(query, newCancelToken())
+          result.results = await updateOrders(result.results)
+
           if (!isMounted()) return
           if (queryData && result?.totalResults > 0) {
             const sortedAssets = sortElements(result.results, queryData)
