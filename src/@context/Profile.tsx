@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 import { getUserSales, getUserTokenOrders } from '@utils/subgraph'
 import { useUserPreferences } from './UserPreferences'
-import { Asset, LoggerInstance } from '@oceanprotocol/lib'
+import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
 import { getDownloadAssets, getPublishedAssets } from '@utils/aquarius'
 import { accountTruncate } from '@utils/web3'
 import axios, { CancelToken } from 'axios'
@@ -231,7 +231,7 @@ function ProfileProvider({
     async function getUserSalesNumber() {
       try {
         const result = await getUserSales(accountId, chainIds)
-        setSales(result)
+        setSales(Math.abs(result))
         LoggerInstance.log(`[profile] Fetched sales number: ${result}.`, result)
       } catch (error) {
         LoggerInstance.error(error.message)

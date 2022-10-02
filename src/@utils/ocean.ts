@@ -1,4 +1,4 @@
-import { ConfigHelper, Config } from '@oceanprotocol/lib'
+import { ConfigHelper, Config } from '@neuradao/ocean-lib'
 // import contractAddresses from '@oceanprotocol/contracts/artifacts/address.json'
 
 export function getOceanConfig(network: string | number): Config {
@@ -25,6 +25,7 @@ export function getDevelopmentConfig(): Config {
     // metadataContractAddress: contractAddresses.development?.Metadata,
     // oceanTokenAddress: contractAddresses.development?.Ocean,
     // There is no subgraph in barge so we hardcode the Rinkeby one for now
-    subgraphUri: 'https://v4.subgraph.rinkeby.oceanprotocol.com'
+    subgraphUri:
+      'http://test.neuradao.co:9000/subgraphs/name/oceanprotocol/ocean-subgraph'
   } as Config
 }

@@ -13,7 +13,7 @@ import {
   ComputeOutput,
   ProviderComputeInitializeResults,
   unitsToAmount
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import { toast } from 'react-toastify'
 import Price from '@shared/Price'
 import FileIcon from '@shared/FileIcon'

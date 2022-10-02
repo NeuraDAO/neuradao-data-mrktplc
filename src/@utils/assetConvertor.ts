@@ -1,5 +1,5 @@
 import { getAccessDetailsForAssets } from './accessDetailsAndPricing'
-import { PublisherTrustedAlgorithm, Asset } from '@oceanprotocol/lib'
+import { PublisherTrustedAlgorithm, Asset } from '@neuradao/ocean-lib'
 import { AssetSelectionAsset } from '@shared/FormFields/AssetSelection'
 import { getServiceByName } from './ddo'
 

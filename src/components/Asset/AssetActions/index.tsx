@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react'
 import Compute from './Compute'
 import Consume from './Download'
-import { FileInfo, LoggerInstance, Datatoken } from '@oceanprotocol/lib'
+import { FileInfo, LoggerInstance, Datatoken } from '@neuradao/ocean-lib'
 import Tabs, { TabsItem } from '@shared/atoms/Tabs'
 import { compareAsBN } from '@utils/numbers'
 import { useAsset } from '@context/Asset'

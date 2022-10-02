@@ -11,7 +11,7 @@ import {
   NftFactory,
   Service,
   ZERO_ADDRESS
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import { mapTimeoutStringToSeconds } from '@utils/ddo'
 import { generateNftCreateData } from '@utils/nft'
 import { getEncryptedFiles } from '@utils/provider'
@@ -66,6 +66,13 @@ export async function transformPublishFormToDdo(
     name,
     description,
     tags,
+    modalities,
+    tasks,
+    size,
+    fileCount,
+    sessions,
+    participants,
+    participantsAge,
     author,
     termsAndConditions,
     dockerImage,
@@ -93,12 +100,21 @@ export async function transformPublishFormToDdo(
     name,
     description,
     tags: transformTags(tags),
+    modalities: transformTags(modalities),
+    tasks: transformTags(tasks),
     author,
     license: 'https://market.oceanprotocol.com/terms',
     links: linksTransformed,
     additionalInformation: {
       termsAndConditions
     },
+    ...(type === 'dataset' && {
+      size,
+      fileCount,
+      sessions,
+      participants,
+      participantsAge
+    }),
     ...(type === 'algorithm' &&
       dockerImage !== '' && {
         algorithm: {

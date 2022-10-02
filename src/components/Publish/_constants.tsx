@@ -12,7 +12,7 @@ import MetadataFields from './Metadata'
 import ServicesFields from './Services'
 import Preview from './Preview'
 import Submission from './Submission'
-import { ServiceComputeOptions } from '@oceanprotocol/lib'
+import { ServiceComputeOptions } from '@neuradao/ocean-lib'
 import contentFeedback from '../../../content/publish/feedback.json'
 
 export const wizardSteps: StepContent[] = [
@@ -64,6 +64,13 @@ export const initialValues: FormPublishData = {
     author: '',
     description: '',
     tags: '',
+    modalities: '',
+    tasks: '',
+    size: '0',
+    fileCount: '0',
+    sessions: '0',
+    participants: '0',
+    participantsAge: '',
     termsAndConditions: false,
     dockerImage: '',
     dockerImageCustom: '',

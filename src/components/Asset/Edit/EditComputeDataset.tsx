@@ -7,7 +7,7 @@ import {
   ServiceComputeOptions,
   Service,
   Asset
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import { useUserPreferences } from '@context/UserPreferences'
 import styles from './index.module.css'
 import Web3Feedback from '@shared/Web3Feedback'

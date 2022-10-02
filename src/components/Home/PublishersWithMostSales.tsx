@@ -1,5 +1,5 @@
 import { useUserPreferences } from '@context/UserPreferences'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import AccountList from '@shared/AccountList/AccountList'
 import { getTopAssetsPublishers } from '@utils/subgraph'
 import React, { ReactElement, useEffect, useState } from 'react'

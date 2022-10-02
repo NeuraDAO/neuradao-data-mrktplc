@@ -7,7 +7,7 @@ import {
   LoggerInstance,
   ProviderComputeInitializeResults,
   ProviderInstance
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import Web3 from 'web3'
 import { getValidUntilTime } from './compute'
 

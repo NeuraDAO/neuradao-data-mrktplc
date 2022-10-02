@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import { getAssetsNames } from '@utils/aquarius'
 import styles from './AssetListTitle.module.css'
 import axios from 'axios'
-import { Asset } from '@oceanprotocol/lib'
+import { Asset } from '@neuradao/ocean-lib'
 import { useMarketMetadata } from '@context/MarketMetadata'
 
 export default function AssetListTitle({

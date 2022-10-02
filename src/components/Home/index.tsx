@@ -3,7 +3,7 @@ import AssetList from '@shared/AssetList'
 import Button from '@shared/atoms/Button'
 import Bookmarks from './Bookmarks'
 import { generateBaseQuery, queryMetadata } from '@utils/aquarius'
-import { Asset, LoggerInstance } from '@oceanprotocol/lib'
+import { Asset, LoggerInstance } from '@neuradao/ocean-lib'
 import { useUserPreferences } from '@context/UserPreferences'
 import styles from './index.module.css'
 import { useIsMounted } from '@hooks/useIsMounted'
@@ -13,6 +13,8 @@ import {
   SortTermOptions
 } from '../../@types/aquarius/SearchQuery'
 import PublishersWithMostSales from './PublishersWithMostSales'
+import { getOrderPriceAndFees } from '@utils/accessDetailsAndPricing'
+import { fetchNftOrders, updateOrders } from '@utils/subgraph'
 
 function sortElements(items: Asset[], sorted: string[]) {
   items.sort(function (a, b) {
@@ -59,12 +61,9 @@ function SectionQueryResult({
       } else {
         try {
           setLoading(true)
-          const result = await queryMetadata(query, newCancelToken())
-          // result.results = result.results.filter((asset) => {
-          //   return (
-          //     asset.nft?.owner === '0x7E0ad0B2CD0560Caf9a4Fc25904d2AB7238d140b'
-          //   )
-          // })
+          let result = await queryMetadata(query, newCancelToken())
+          result.results = await updateOrders(result.results)
+
           if (!isMounted()) return
           if (queryData && result?.totalResults > 0) {
             const sortedAssets = sortElements(result.results, queryData)

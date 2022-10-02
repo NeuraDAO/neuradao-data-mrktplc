@@ -29,5 +29,11 @@
     "incremental": true
   },
   "exclude": ["node_modules", ".next", "*.js"],
-  "include": ["./src/**/*", "./tests/**/*", "./next-env.d.ts", "./content/**/*"]
+  "include": [
+    "./src/**/*",
+    "./tests/**/*",
+    "./next-env.d.ts",
+    "./content/**/*",
+    "./node_scripts/**/*"
+  ]
 }

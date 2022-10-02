@@ -1,4 +1,4 @@
-import { Asset, DDO, Service } from '@oceanprotocol/lib'
+import { Asset, DDO, Service } from '@neuradao/ocean-lib'
 
 export function getServiceByName(
   ddo: Asset | DDO,

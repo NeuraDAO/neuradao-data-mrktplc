@@ -105,6 +105,48 @@ export default function MetadataFields(): ReactElement {
         name="metadata.tags"
       />
 
+      <Field
+        {...getFieldContent('modalities', content.metadata.fields)}
+        component={Input}
+        name="metadata.modalities"
+      />
+
+      <Field
+        {...getFieldContent('tasks', content.metadata.fields)}
+        component={Input}
+        name="metadata.tasks"
+      />
+
+      <Field
+        {...getFieldContent('size', content.metadata.fields)}
+        component={Input}
+        name="metadata.size"
+      />
+
+      <Field
+        {...getFieldContent('fileCount', content.metadata.fields)}
+        component={Input}
+        name="metadata.fileCount"
+      />
+
+      <Field
+        {...getFieldContent('sessions', content.metadata.fields)}
+        component={Input}
+        name="metadata.sessions"
+      />
+
+      <Field
+        {...getFieldContent('participants', content.metadata.fields)}
+        component={Input}
+        name="metadata.participants"
+      />
+
+      <Field
+        {...getFieldContent('participantsAge', content.metadata.fields)}
+        component={Input}
+        name="metadata.participantsAge"
+      />
+
       {values.metadata.type === 'algorithm' && (
         <>
           <Field

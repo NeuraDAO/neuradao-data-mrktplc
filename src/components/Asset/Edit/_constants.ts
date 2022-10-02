@@ -1,4 +1,4 @@
-import { FileInfo, Metadata, ServiceComputeOptions } from '@oceanprotocol/lib'
+import { FileInfo, Metadata, ServiceComputeOptions } from '@neuradao/ocean-lib'
 import { secondsToString } from '@utils/ddo'
 import * as Yup from 'yup'
 import { ComputeEditForm, MetadataEditForm } from './_types'

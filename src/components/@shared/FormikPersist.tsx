@@ -3,7 +3,7 @@ import { FormikProps, connect } from 'formik'
 import debounce from 'lodash.debounce'
 import omit from 'lodash.omit'
 import isEqual from 'react-fast-compare'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 
 export interface PersistProps {
   name: string

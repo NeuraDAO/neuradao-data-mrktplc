@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { prettySize } from './utils'
 import cleanupContentType from '@utils/cleanupContentType'
 import styles from './Info.module.css'
-import { FileInfo as FileInfoData } from '@oceanprotocol/lib'
+import { FileInfo as FileInfoData } from '@neuradao/ocean-lib'
 
 export default function FileInfo({
   file,

@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import External from '@images/external.svg'
 import classNames from 'classnames/bind'
-import { Config } from '@oceanprotocol/lib'
+import { Config } from '@neuradao/ocean-lib'
 import styles from './index.module.css'
 import { getOceanConfig } from '@utils/ocean'
 

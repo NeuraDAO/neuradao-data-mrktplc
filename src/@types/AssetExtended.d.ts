@@ -1,4 +1,4 @@
-import { Asset } from '@oceanprotocol/lib'
+import { Asset } from '@neuradao/ocean-lib'
 
 // declaring into global scope to be able to use this as
 // ambiant types despite the above imports

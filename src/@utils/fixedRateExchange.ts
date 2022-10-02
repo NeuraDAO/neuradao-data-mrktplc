@@ -1,4 +1,4 @@
-import { FixedRateExchange, PriceAndFees } from '@oceanprotocol/lib'
+import { FixedRateExchange, PriceAndFees } from '@neuradao/ocean-lib'
 import { consumeMarketFixedSwapFee } from '../../app.config'
 import Web3 from 'web3'
 import { getOceanConfig } from './ocean'

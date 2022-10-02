@@ -13,7 +13,7 @@ import {
   LoggerInstance,
   ProviderFees,
   ProviderInstance
-} from '@oceanprotocol/lib'
+} from '@neuradao/ocean-lib'
 import { getFixedBuyPrice } from './fixedRateExchange'
 import Decimal from 'decimal.js'
 import {

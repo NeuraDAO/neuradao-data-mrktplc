@@ -125,7 +125,7 @@ All initial data sets and their metadata (DDO) is retrieved client-side on run-t
 Aquarius runs Elasticsearch under the hood so its stored metadata can be queried with [Elasticsearch queries](https://www.elastic.co/guide/en/elasticsearch/reference/current/full-text-queries.html) like so:
 
 ```tsx
-import { QueryResult } from '@oceanprotocol/lib/dist/node/metadatacache/MetadataCache'
+import { QueryResult } from '@neuradao/ocean-lib/dist/node/metadatacache/MetadataCache'
 import { queryMetadata } from '@utils/aquarius'
 
 const queryLatest = {

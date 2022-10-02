@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState, useCallback } from 'react'
 import Time from '@shared/atoms/Time'
-import { LoggerInstance } from '@oceanprotocol/lib'
+import { LoggerInstance } from '@neuradao/ocean-lib'
 import Table, { TableOceanColumn } from '@shared/atoms/Table'
 import Button from '@shared/atoms/Button'
 import { useWeb3 } from '@context/Web3'

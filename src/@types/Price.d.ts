@@ -1,4 +1,4 @@
-import { ProviderFees } from '@oceanprotocol/lib'
+import { ProviderFees } from '@neuradao/ocean-lib'
 
 // declaring into global scope to be able to use this as
 // ambiant types despite the above imports

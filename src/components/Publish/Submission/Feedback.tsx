@@ -6,6 +6,7 @@ import TransactionCount from './TransactionCount'
 
 export function Feedback(): ReactElement {
   const { values } = useFormikContext<FormPublishData>()
+  console.log({ values })
 
   const items = Object.entries(values.feedback).map(([key, value], index) => (
     <li key={index} className={styles[value.status]}>
