@@ -1,12 +1,14 @@
+import { FileInfo } from '@oceanprotocol/lib'
 export interface MetadataEditForm {
   name: string
   description: string
   timeout: string
   price?: string
-  links?: string | any[]
-  files: string | any[]
+  files: FileInfo[]
+  links?: FileInfo[]
   author?: string
   dockerImage?: any
+  tags?: string[]
 }
 
 export interface ComputeEditForm {

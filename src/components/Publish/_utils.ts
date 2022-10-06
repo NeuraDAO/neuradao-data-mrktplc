@@ -1,9 +1,10 @@
 import {
   Config,
   DDO,
-  Erc20CreateParams,
   FreCreationParams,
   generateDid,
+  DatatokenCreateParams,
+  DispenserCreationParams,
   getHash,
   LoggerInstance,
   Metadata,
@@ -46,8 +47,7 @@ function dateToStringNoMS(date: Date): string {
   return date.toISOString().replace(/\.[0-9]{3}Z/, 'Z')
 }
 
-function transformTags(value: string): string[] {
-  const originalTags = value?.split(',')
+function transformTags(originalTags: string[]): string[] {
   const transformedTags = originalTags?.map((tag) => slugify(tag).toLowerCase())
   return transformedTags
 }
@@ -202,7 +202,7 @@ export async function createTokensAndPricing(
   LoggerInstance.log('[publish] Creating NFT with metadata', nftCreateData)
 
   // TODO: cap is hardcoded for now to 1000, this needs to be discussed at some point
-  const ercParams: Erc20CreateParams = {
+  const ercParams: DatatokenCreateParams = {
     templateIndex: 2,
     minter: accountId,
     paymentCollector: accountId,
@@ -238,7 +238,7 @@ export async function createTokensAndPricing(
         freParams
       )
 
-      const result = await nftFactory.createNftErc20WithFixedRate(
+      const result = await nftFactory.createNftWithDatatokenWithFixedRate(
         accountId,
         nftCreateData,
         ercParams,
@@ -257,7 +257,7 @@ export async function createTokensAndPricing(
       // maxTokens -  how many tokens cand be dispensed when someone requests . If maxTokens=2 then someone can't request 3 in one tx
       // maxBalance - how many dt the user has in it's wallet before the dispenser will not dispense dt
       // both will be just 1 for the market
-      const dispenserParams = {
+      const dispenserParams: DispenserCreationParams = {
         dispenserAddress: config.dispenserAddress,
         maxTokens: web3.utils.toWei('1'),
         maxBalance: web3.utils.toWei('1'),
@@ -270,7 +270,7 @@ export async function createTokensAndPricing(
         dispenserParams
       )
 
-      const result = await nftFactory.createNftErc20WithDispenser(
+      const result = await nftFactory.createNftWithDatatokenWithDispenser(
         accountId,
         nftCreateData,
         ercParams,

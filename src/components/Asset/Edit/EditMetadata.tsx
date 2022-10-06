@@ -7,7 +7,8 @@ import {
   Asset,
   Service
 } from '@oceanprotocol/lib'
-import { validationSchema, getInitialValues } from './_constants'
+import { validationSchema } from './_validation'
+import { getInitialValues } from './_constants'
 import { MetadataEditForm } from './_types'
 import { useWeb3 } from '@context/Web3'
 import { useUserPreferences } from '@context/UserPreferences'
@@ -54,8 +55,8 @@ export default function Edit({
     const config = getOceanConfig(asset.chainId)
 
     const fixedRateInstance = new FixedRateExchange(
-      web3,
-      config.fixedRateExchangeAddress
+      config.fixedRateExchangeAddress,
+      web3
     )
 
     const setPriceResp = await fixedRateInstance.setRate(
@@ -108,10 +109,10 @@ export default function Edit({
           name: values.name,
           description: values.description,
           links: linksTransformed,
-          author: values.author
+          author: values.author,
+          tags: values.tags
           // algorithm: values.algorithm,
         }
-      }
 
       // const updatedMetadata: Metadata = {
       //   ...asset.metadata,

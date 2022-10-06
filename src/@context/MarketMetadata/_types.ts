@@ -16,6 +16,7 @@ export interface AppConfig {
   consumeMarketOrderFee: string
   consumeMarketFixedSwapFee: string
   currencies: string[]
+  coingeckoTokenIds: string[]
   allowFixedPricing: string
   allowFreePricing: string
   defaultPrivacyPolicySlug: string
@@ -25,8 +26,6 @@ export interface AppConfig {
     classNameLight: string
     storageKey: string
   }
-  v3MetadataCacheUri: string
-  v3MarketUri: string
 }
 export interface SiteContent {
   siteTitle: string
