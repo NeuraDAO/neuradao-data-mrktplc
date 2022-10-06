@@ -113,7 +113,7 @@ export default function Edit({
           tags: values.tags
           // algorithm: values.algorithm,
         }
-
+      }
       // const updatedMetadata: Metadata = {
       //   ...asset.metadata,
       //   name: values.name,
